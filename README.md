@@ -60,7 +60,7 @@ $ make
 The benchmark applications that we use for the experiments are from Rodinia, ispass2009-benchmarks, Parboil. The steps for installing the benchmarks are given in readme files located in the corresponding benchmark suites.  
 
 
-##Executing Benchmark Applications on Simulators
+## Executing Benchmark Applications on Simulators
 
 Executing the benchmark applications on the simulator requires configuring the simulator. The configuration file to configure the RegistersSharing implementation is listed under "Config/RegisterSharing" directory. Before running the experiments, the configuration files must be copied the application working directory. For example, to configure the RegisterSharing for "hotspot" application (Rodnina benchmark), perform the following steps:
 
