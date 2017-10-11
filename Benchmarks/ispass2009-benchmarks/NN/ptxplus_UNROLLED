@@ -1,0 +1,417 @@
+//HEADER
+.version 1.4+
+.target sm_10, map_f64_to_f32
+//END HEADER
+
+
+//INSTRUCTIONS
+
+.const .u32 constant0[50] = {
+          0x00000000, 0x00000001, 0x00000002, 0x00000003, 
+          0x00000004, 0x0000001d, 0x0000001e, 0x0000001f, 
+          0x00000020, 0x00000021, 0x0000003a, 0x0000003b, 
+          0x0000003c, 0x0000003d, 0x0000003e, 0x00000057, 
+          0x00000058, 0x00000059, 0x0000005a, 0x0000005b, 
+          0x00000074, 0x00000075, 0x00000076, 0x00000077, 
+          0x00000078, 0x00000000, 0x00000001, 0x00000002, 
+          0x00000003, 0x00000004, 0x0000000d, 0x0000000e, 
+          0x0000000f, 0x00000010, 0x00000011, 0x0000001a, 
+          0x0000001b, 0x0000001c, 0x0000001d, 0x0000001e, 
+          0x00000027, 0x00000028, 0x00000029, 0x0000002a, 
+          0x0000002b, 0x00000034, 0x00000035, 0x00000036, 
+          0x00000037, 0x00000038
+};
+
+.const .u32 constant1_Z18executeSecondLayerPfS_S_[12] = {
+          0x000003ff, 0x3f0ccccd, 0xbf317200, 0xb5bfbe8e, 
+          0x3f800000, 0xc0000000, 0x42b00000, 0x80000000, 
+          0x3c86a81b, 0x3e08677b, 0xbeaaaa29, 0x000004e2
+};
+
+.const .u32 constant1_Z18executeFourthLayerPfS_S_[11] = {
+          0x3f0ccccd, 0xbf317200, 0xb5bfbe8e, 0x3f800000, 
+          0xc0000000, 0x42b00000, 0x80000000, 0x3c86a81b, 
+          0x3e08677b, 0xbeaaaa29, 0x0000000a
+};
+
+.const .u32 constant1_Z17executeFirstLayerPfS_S_[12] = {
+          0x000003ff, 0x3f0ccccd, 0xbf317200, 0xb5bfbe8e, 
+          0x3f800000, 0xc0000000, 0x42b00000, 0x80000000, 
+          0x3c86a81b, 0x3e08677b, 0xbeaaaa29, 0x000003f6
+};
+
+.const .u32 constant1_Z17executeThirdLayerPfS_S_[11] = {
+          0x3f0ccccd, 0xbf317200, 0xb5bfbe8e, 0x3f800000, 
+          0xc0000000, 0x42b00000, 0x80000000, 0x3c86a81b, 
+          0x3e08677b, 0xbeaaaa29, 0x00000064
+};
+
+
+
+.const .b8 kernelTemplate2[100];
+.constptr kernelTemplate2, constant0, 100;
+.const .b8 kernelTemplate[100];
+.constptr kernelTemplate, constant0, 0;
+
+
+.entry  _Z17executeThirdLayerPfS_S_ (
+	.param  .u64 __cudaparm__Z17executeThirdLayerPfS_S__Layer3_Neurons_GPU ,
+	.param  .u64 __cudaparm__Z17executeThirdLayerPfS_S__Layer3_Weights_GPU ,
+	.param  .u64 __cudaparm__Z17executeThirdLayerPfS_S__Layer4_Neurons_GPU )
+{
+	.reg .u32 $r<8>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	cvt.u32.u16 $r0, %ctaid.x;
+	mov.u32 $r1, 0x000004e3;
+	mul.wide.u16 $r2, $r0.lo, $r1.hi;
+	mad.wide.u16 $r2, $r0.hi, $r1.lo, $r2;
+	shl.u32 $r2, $r2, 0x00000010;
+	mad.wide.u16 $r1, $r0.lo, $r1.lo, $r2;
+	shl.u32 $r2, $r1, 0x00000002;
+	add.u32 $r2, s[0x0018], $r2;
+	mul.wide.u16 $r5, %ctaid.y, 0x000004e2;
+	add.u32 $r4, $r1, 0x000004e2;
+	ld.global.u32 $r3, [$r2];
+	l0x00000058: shl.u32 $r6, $r5, 0x00000002;
+	add.u32 $r2, $r2, 0x00000004;
+	add.u32 $r7, s[0x0010], $r6;
+	ld.global.u32 $r6, [$r2];
+	ld.global.u32 $r7, [$r7];
+	add.u32 $r1, $r1, 0x00000001;
+	set.ne.s32.s32 $p0/$o127, $r1, $r4;
+	mad.f32 $r3, $r7, $r6, $r3;
+	add.u32 $r5, $r5, 0x00000001;
+	@$p0.ne bra l0x00000058;
+	cvt.f32.f32 $r1, $r3;
+	mul.f32 $r2, $r1, 0x3f2aaaab;
+	set.abs.ge.f32.f32 $p0/$o127, $r2, constant1_Z17executeThirdLayerPfS_S_[0x0000];
+	abs.f32 $r3, $r2;
+	@$p0.eq bra l0x00000168;
+	add.f32 $r1, $r3, $r3;
+	mul.f32 $r4, $r1, 0x3fb8aa3b;
+	cvt.rz.f32.f32 $r4, $r4;
+	mad.f32 $r1, $r4, 0xbf317200, $r1;
+	mad.f32 $r1, $r4, 0xb5bfbe8e, $r1;
+	mul.f32 $r5, $r1, 0x3fb8aa3b;
+	nop; //ex2.f32 $r1, $r4;
+	nop; //ex2.f32 $r4, $r5;
+	ex2.f32 $r1, $r1;
+	ex2.f32 $r4, $r4;
+	mad.f32 $r4, $r4, $r1, constant1_Z17executeThirdLayerPfS_S_[0x000c];
+	mov.u32 $r1, 0x3f800000;
+	rcp.f32 $r4, $r4;
+	set.ge.f32.f32 $p0/$o127, $r3, constant1_Z17executeThirdLayerPfS_S_[0x0014];
+	mad.f32 $r1, $r4, 0xc0000000, $r1;
+	and.b32 $r2, $r2, constant1_Z17executeThirdLayerPfS_S_[0x0018];
+	@$p0.ne mov.u32 $r1, constant1_Z17executeThirdLayerPfS_S_[0x000c];
+	or.b32 $r1, $r1, $r2;
+	bra l0x000001b0;
+	l0x00000168: mul.f32 $r3, $r2, $r2;
+	mov.u32 $r1, 0xbd57be66;
+	mad.f32 $r1, $r3, 0x3c86a81b, $r1;
+	mad.f32 $r1, $r3, $r1, constant1_Z17executeThirdLayerPfS_S_[0x0020];
+	mad.f32 $r1, $r3, $r1, constant1_Z17executeThirdLayerPfS_S_[0x0024];
+	mul.f32 $r1, $r3, $r1;
+	set.eq.f32.f32 $p0/$o127, $r2, $r124;
+	mad.f32 $r1, $r2, $r1, $r2;
+	@$p0.ne add.f32 $r1, $r2, $r2;
+	l0x000001b0: mad.lo.u16 $r0, %ctaid.y, 0x00000064, $r0;
+	cvt.f32.f32 $r1, $r1;
+	shl.u32 $r0, $r0, 0x00000002;
+	mul.f32 $r1, $r1, 0x3fdba29c;
+	add.u32 $r0, s[0x0020], $r0;
+	st.global.u32 [$r0], $r1;
+
+	l_exit: exit;
+}
+
+.entry  _Z17executeFirstLayerPfS_S_ (
+	.param  .u64 __cudaparm__Z17executeFirstLayerPfS_S__Layer1_Neurons_GPU ,
+	.param  .u64 __cudaparm__Z17executeFirstLayerPfS_S__Layer1_Weights_GPU ,
+	.param  .u64 __cudaparm__Z17executeFirstLayerPfS_S__Layer2_Neurons_GPU )
+{
+	.reg .u32 $r<10>;
+	.reg .u32 $ofs<2>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	and.u16 $r1.lo, $r0.hi, constant1_Z17executeFirstLayerPfS_S_[0x0000];
+	cvt.u32.u16 $r2, $r0.lo;
+	mul.wide.u16 $r0, %ctaid.x, 0x0000001a;
+	mul.wide.u16 $r3, $r1.lo, 0x0000003a;
+	shl.u32 $r5, $r2, 0x00000001;
+	shl.u32 $r4, $r0, 0x00000002;
+	add.half.u32 $r3, $r5, $r3;
+	add.half.u32 $r4, s[0x0018], $r4;
+	shl.b32 $ofs1, $r124, 0x0;
+	mul.wide.u16 $r6, %ctaid.y, 0x00000349;
+	add.u32 $r7, $r0, 0x00000019;
+	ld.global.u32 $r5, [$r4];
+	l0x00000058: add.half.u32 $r8, $r3, constant0[$ofs1+0x0000];
+	add.half.u32 $r8, $r6, $r8;
+	shl.u32 $r8, $r8, 0x00000002;
+	add.u32 $r4, $r4, 0x00000004;
+	add.u32 $r9, s[0x0010], $r8;
+	ld.global.u32 $r8, [$r4];
+	ld.global.u32 $r9, [$r9];
+	add.u32 $r0, $r0, 0x00000001;
+	set.ne.s32.s32 $p0/$o127, $r0, $r7;
+	mad.f32 $r5, $r9, $r8, $r5;
+	add.u32 $ofs1, $ofs1, 0x00000004;
+	@$p0.ne bra l0x00000058;
+	cvt.f32.f32 $r0, $r5;
+	mul.f32 $r3, $r0, 0x3f2aaaab;
+	set.abs.ge.f32.f32 $p0/$o127, $r3, constant1_Z17executeFirstLayerPfS_S_[0x0004];
+	ssy 0x000001c0;
+	abs.f32 $r4, $r3;
+	@$p0.eq bra l0x00000178;
+	add.f32 $r0, $r4, $r4;
+	mul.f32 $r5, $r0, 0x3fb8aa3b;
+	cvt.rz.f32.f32 $r5, $r5;
+	mad.f32 $r0, $r5, 0xbf317200, $r0;
+	mad.f32 $r0, $r5, 0xb5bfbe8e, $r0;
+	mul.f32 $r6, $r0, 0x3fb8aa3b;
+	nop; //ex2.f32 $r0, $r5;
+	nop; //ex2.f32 $r5, $r6;
+	ex2.f32 $r0, $r0;
+	ex2.f32 $r5, $r5;
+	mad.f32 $r5, $r5, $r0, constant1_Z17executeFirstLayerPfS_S_[0x0010];
+	mov.u32 $r0, 0x3f800000;
+	rcp.f32 $r5, $r5;
+	set.ge.f32.f32 $p0/$o127, $r4, constant1_Z17executeFirstLayerPfS_S_[0x0018];
+	mad.f32 $r0, $r5, 0xc0000000, $r0;
+	and.b32 $r3, $r3, constant1_Z17executeFirstLayerPfS_S_[0x001c];
+	@$p0.ne mov.u32 $r0, constant1_Z17executeFirstLayerPfS_S_[0x0010];
+	or.b32 $r0, $r0, $r3;
+	bra l0x000001c0;
+	l0x00000178: mul.f32 $r4, $r3, $r3;
+	mov.u32 $r0, 0xbd57be66;
+	mad.f32 $r0, $r4, 0x3c86a81b, $r0;
+	mad.f32 $r0, $r4, $r0, constant1_Z17executeFirstLayerPfS_S_[0x0024];
+	mad.f32 $r0, $r4, $r0, constant1_Z17executeFirstLayerPfS_S_[0x0028];
+	mul.f32 $r0, $r4, $r0;
+	set.eq.f32.f32 $p0/$o127, $r3, $r124;
+	mad.f32 $r0, $r3, $r0, $r3;
+	@$p0.ne add.f32 $r0, $r3, $r3;
+	l0x000001c0: cvt.f32.f32 $r3, $r0;
+	mul.wide.u16 $r0, $r1.lo, 0x0000000d;
+	mul.wide.u16 $r1, %ctaid.x, 0x000000a9;
+	add.half.u32 $r0, $r0, $r1;
+	add.half.u32 $r0, $r2, $r0;
+	mad.lo.u16 $r0, %ctaid.y, 0x000003f6, $r0;
+	shl.u32 $r0, $r0, 0x00000002;
+	mul.f32 $r1, $r3, 0x3fdba29c;
+	add.u32 $r0, s[0x0020], $r0;
+	st.global.u32 [$r0], $r1;
+
+	l_exit: exit;
+}
+
+.entry  _Z18executeFourthLayerPfS_S_ (
+	.param  .u64 __cudaparm__Z18executeFourthLayerPfS_S__Layer4_Neurons_GPU ,
+	.param  .u64 __cudaparm__Z18executeFourthLayerPfS_S__Layer4_Weights_GPU ,
+	.param  .u64 __cudaparm__Z18executeFourthLayerPfS_S__Layer5_Neurons_GPU )
+{
+	.reg .u32 $r<8>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	cvt.u32.u16 $r0, %ctaid.x;
+	mul24.lo.u32 $r1, $r0, 0x00000065;
+	shl.u32 $r2, $r1, 0x00000002;
+	add.u32 $r2, s[0x0018], $r2;
+	mul.wide.u16 $r5, %ctaid.y, 0x00000064;
+	add.u32 $r4, $r1, 0x00000064;
+	ld.global.u32 $r3, [$r2];
+	l0x00000038: shl.u32 $r6, $r5, 0x00000002;
+	add.u32 $r2, $r2, 0x00000004;
+	add.u32 $r7, s[0x0010], $r6;
+	ld.global.u32 $r6, [$r2];
+	ld.global.u32 $r7, [$r7];
+	add.u32 $r1, $r1, 0x00000001;
+	set.ne.s32.s32 $p0/$o127, $r1, $r4;
+	mad.f32 $r3, $r7, $r6, $r3;
+	add.u32 $r5, $r5, 0x00000001;
+	@$p0.ne bra l0x00000038;
+	cvt.f32.f32 $r1, $r3;
+	mul.f32 $r2, $r1, 0x3f2aaaab;
+	set.abs.ge.f32.f32 $p0/$o127, $r2, constant1_Z18executeFourthLayerPfS_S_[0x0000];
+	abs.f32 $r3, $r2;
+	@$p0.eq bra l0x00000148;
+	add.f32 $r1, $r3, $r3;
+	mul.f32 $r4, $r1, 0x3fb8aa3b;
+	cvt.rz.f32.f32 $r4, $r4;
+	mad.f32 $r1, $r4, 0xbf317200, $r1;
+	mad.f32 $r1, $r4, 0xb5bfbe8e, $r1;
+	mul.f32 $r5, $r1, 0x3fb8aa3b;
+	nop; //ex2.f32 $r1, $r4;
+	nop; //ex2.f32 $r4, $r5;
+	ex2.f32 $r1, $r1;
+	ex2.f32 $r4, $r4;
+	mad.f32 $r4, $r4, $r1, constant1_Z18executeFourthLayerPfS_S_[0x000c];
+	mov.u32 $r1, 0x3f800000;
+	rcp.f32 $r4, $r4;
+	set.ge.f32.f32 $p0/$o127, $r3, constant1_Z18executeFourthLayerPfS_S_[0x0014];
+	mad.f32 $r1, $r4, 0xc0000000, $r1;
+	and.b32 $r2, $r2, constant1_Z18executeFourthLayerPfS_S_[0x0018];
+	@$p0.ne mov.u32 $r1, constant1_Z18executeFourthLayerPfS_S_[0x000c];
+	or.b32 $r1, $r1, $r2;
+	bra l0x00000190;
+	l0x00000148: mul.f32 $r3, $r2, $r2;
+	mov.u32 $r1, 0xbd57be66;
+	mad.f32 $r1, $r3, 0x3c86a81b, $r1;
+	mad.f32 $r1, $r3, $r1, constant1_Z18executeFourthLayerPfS_S_[0x0020];
+	mad.f32 $r1, $r3, $r1, constant1_Z18executeFourthLayerPfS_S_[0x0024];
+	mul.f32 $r1, $r3, $r1;
+	set.eq.f32.f32 $p0/$o127, $r2, $r124;
+	mad.f32 $r1, $r2, $r1, $r2;
+	@$p0.ne add.f32 $r1, $r2, $r2;
+	l0x00000190: mad.lo.u16 $r0, %ctaid.y, 0x0000000a, $r0;
+	cvt.f32.f32 $r1, $r1;
+	shl.u32 $r0, $r0, 0x00000002;
+	mul.f32 $r1, $r1, 0x3fdba29c;
+	add.u32 $r0, s[0x0020], $r0;
+	st.global.u32 [$r0], $r1;
+
+	l_exit: exit;
+}
+
+.entry  _Z18executeSecondLayerPfS_S_ (
+	.param  .u64 __cudaparm__Z18executeSecondLayerPfS_S__Layer2_Neurons_GPU ,
+	.param  .u64 __cudaparm__Z18executeSecondLayerPfS_S__Layer2_Weights_GPU ,
+	.param  .u64 __cudaparm__Z18executeSecondLayerPfS_S__Layer3_Neurons_GPU )
+{
+	.reg .u32 $r124;
+	.reg .u32 $o127;
+	.reg .u32 $r1;
+	.reg .u32 $r0;
+	.reg .u32 $r2;
+	.reg .u32 $r3;
+	.reg .u32 $r6;
+	.reg .u32 $r4;
+	.reg .u32 $r5;
+	.reg .u32 $r8;
+	.reg .u32 $ofs1;
+	.reg .u32 $r7;
+	.reg .u32 $r9;
+	.reg .u32 $r11;
+	.reg .u32 $r12;
+	.reg .u32 $r10;
+	.reg .pred $p0;
+	.reg .pred $p1;
+	.reg .pred $p2;
+	.reg .pred $p3;
+	.reg .u32 $ofs0;
+	
+	and.u16 $r1.lo, $r0.hi, constant1_Z18executeSecondLayerPfS_S_[0x0000];
+	cvt.u32.u16 $r2, $r0.lo;
+	mul.wide.u16 $r3, %ctaid.x, 0x0000009c;
+	mul.wide.u16 $r0, $r1.lo, 0x0000001a;
+	shl.u32 $r6, $r2, 0x00000001;
+	shl.u32 $r4, $r3, 0x00000002;
+	mov.u32 $r5, 0x00000064;
+	add.half.u32 $r0, $r6, $r0;
+	add.half.u32 $r4, s[0x0018], $r4;
+	ld.global.u32 $r8, [$r4];
+	shl.b32 $ofs1, $r5, 0x0;
+	mul.wide.u16 $r5, %ctaid.y, 0x000003f6;
+	add.u32 $r6, $r3, 0x00000096;
+	l0x00000060: add.half.u32 $r7, $r0, constant0[$ofs1+0x0000];
+	add.half.u32 $r7, $r7, $r5;
+	shl.u32 $r7, $r7, 0x00000002;
+	add.u32 $r7, s[0x0010], $r7;
+	add.u32 $r9, $r4, 0x00000004;
+	ld.global.u32 $r11, [$r9];
+	ld.global.u32 $r12, [$r7];
+	add.u32 $r9, $r4, 0x00000008;
+	ld.global.u32 $r10, [$r9];
+	add.u32 $r9, $r7, 0x000002a4;
+	ld.global.u32 $r9, [$r9];
+	mad.f32 $r8, $r12, $r11, $r8;
+	mad.f32 $r8, $r10, $r9, $r8;
+	add.u32 $r9, $r4, 0x0000000c;
+	ld.global.u32 $r10, [$r9];
+	add.u32 $r11, $r4, 0x00000010;
+	add.u32 $r9, $r7, 0x00000548;
+	ld.global.u32 $r12, [$r9];
+	ld.global.u32 $r9, [$r11];
+	add.u32 $r11, $r7, 0x000007ec;
+	ld.global.u32 $r11, [$r11];
+	mad.f32 $r10, $r10, $r12, $r8;
+	add.u32 $r8, $r4, 0x00000014;
+	ld.global.u32 $r8, [$r8];
+	mad.f32 $r11, $r9, $r11, $r10;
+	add.u32 $r4, $r4, 0x00000018;
+	add.u32 $r9, $r7, 0x00000a90;
+	ld.global.u32 $r10, [$r9];
+	ld.global.u32 $r9, [$r4];
+	add.u32 $r7, $r7, 0x00000d34;
+	ld.global.u32 $r7, [$r7];
+	add.u32 $r3, $r3, 0x00000006;
+	mad.f32 $r8, $r8, $r10, $r11;
+	set.ne.s32.s32 $p0/$o127, $r3, $r6;
+	mad.f32 $r8, $r9, $r7, $r8;
+	add.u32 $ofs1, $ofs1, 0x00000004;
+	@$p0.ne bra l0x00000060;
+	cvt.f32.f32 $r0, $r8;
+	mul.f32 $r3, $r0, 0x3f2aaaab;
+	set.abs.ge.f32.f32 $p0/$o127, $r3, constant1_Z18executeSecondLayerPfS_S_[0x0004];
+	ssy 0x00000290;
+	abs.f32 $r4, $r3;
+	@$p0.eq bra l0x00000248;
+	add.f32 $r0, $r4, $r4;
+	mul.f32 $r5, $r0, 0x3fb8aa3b;
+	cvt.rz.f32.f32 $r5, $r5;
+	mad.f32 $r0, $r5, 0xbf317200, $r0;
+	mad.f32 $r0, $r5, 0xb5bfbe8e, $r0;
+	mul.f32 $r6, $r0, 0x3fb8aa3b;
+	nop; //ex2.f32 $r0, $r5;
+	nop; //ex2.f32 $r5, $r6;
+	ex2.f32 $r0, $r0;
+	ex2.f32 $r5, $r5;
+	mad.f32 $r5, $r5, $r0, constant1_Z18executeSecondLayerPfS_S_[0x0010];
+	mov.u32 $r0, 0x3f800000;
+	rcp.f32 $r5, $r5;
+	set.ge.f32.f32 $p0/$o127, $r4, constant1_Z18executeSecondLayerPfS_S_[0x0018];
+	mad.f32 $r0, $r5, 0xc0000000, $r0;
+	and.b32 $r3, $r3, constant1_Z18executeSecondLayerPfS_S_[0x001c];
+	@$p0.ne mov.u32 $r0, constant1_Z18executeSecondLayerPfS_S_[0x0010];
+	or.b32 $r0, $r0, $r3;
+	bra l0x00000290;
+	l0x00000248: mul.f32 $r4, $r3, $r3;
+	mov.u32 $r0, 0xbd57be66;
+	mad.f32 $r0, $r4, 0x3c86a81b, $r0;
+	mad.f32 $r0, $r4, $r0, constant1_Z18executeSecondLayerPfS_S_[0x0024];
+	mad.f32 $r0, $r4, $r0, constant1_Z18executeSecondLayerPfS_S_[0x0028];
+	mul.f32 $r0, $r4, $r0;
+	set.eq.f32.f32 $p0/$o127, $r3, $r124;
+	mad.f32 $r0, $r3, $r0, $r3;
+	@$p0.ne add.f32 $r0, $r3, $r3;
+	l0x00000290: cvt.f32.f32 $r3, $r0;
+	mul.wide.u16 $r0, $r1.lo, 0x00000005;
+	mul.wide.u16 $r1, %ctaid.x, 0x00000019;
+	add.half.u32 $r0, $r0, $r1;
+	add.half.u32 $r0, $r2, $r0;
+	mad.lo.u16 $r0, %ctaid.y, 0x000004e2, $r0;
+	shl.u32 $r0, $r0, 0x00000002;
+	mul.f32 $r1, $r3, 0x3fdba29c;
+	add.u32 $r0, s[0x0020], $r0;
+	st.global.u32 [$r0], $r1;
+
+	l_exit: exit;
+}
+//END INSTRUCTIONS

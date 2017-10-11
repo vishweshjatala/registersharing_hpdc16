@@ -1,0 +1,237 @@
+/*
+* Ocelot Version : 2.1.0
+*/
+
+.version 3.1
+.target sm_10, map_f64_to_f32
+.address_size 64
+/* Module /home/vishwesh/Desktop/Register_Sharing_Pbm/Results/PTX_FILES/gaussian/ptx_org */
+
+/* Function prototypes */
+.entry _Z4Fan2PfS_S_iii (.param  .u64 __cudaparm__Z4Fan2PfS_S_iii_m_cuda, .param  .u64 __cudaparm__Z4Fan2PfS_S_iii_a_cuda, .param  .u64 __cudaparm__Z4Fan2PfS_S_iii_b_cuda, .param  .s32 __cudaparm__Z4Fan2PfS_S_iii_Size, .param  .s32 __cudaparm__Z4Fan2PfS_S_iii_j1, .param  .s32 __cudaparm__Z4Fan2PfS_S_iii_t);
+.entry _Z4Fan1PfS_ii (.param  .u64 __cudaparm__Z4Fan1PfS_ii_m_cuda, .param  .u64 __cudaparm__Z4Fan1PfS_ii_a_cuda, .param  .s32 __cudaparm__Z4Fan1PfS_ii_Size, .param  .s32 __cudaparm__Z4Fan1PfS_ii_t);
+
+/* Globals */
+
+/* Textures */
+
+/* Kernels */
+.entry _Z4Fan2PfS_S_iii(.param  .u64 __cudaparm__Z4Fan2PfS_S_iii_m_cuda,
+		.param  .u64 __cudaparm__Z4Fan2PfS_S_iii_a_cuda,
+		.param  .u64 __cudaparm__Z4Fan2PfS_S_iii_b_cuda,
+		.param  .s32 __cudaparm__Z4Fan2PfS_S_iii_Size,
+		.param  .s32 __cudaparm__Z4Fan2PfS_S_iii_j1,
+		.param  .s32 __cudaparm__Z4Fan2PfS_S_iii_t)
+{
+
+	.reg .u16 %r0;
+	.reg .u16 %r1;
+	.reg .u32 %r2;
+	.reg .u32 %r3;
+	.reg .u32 %r4;
+	.reg .u32 %r5;
+	.reg .u32 %r6;
+	.reg .u32 %r7;
+	.reg .u32 %r8;
+	.reg .pred %p9;
+	.reg .u16 %r10;
+	.reg .u16 %r11;
+	.reg .u32 %r12;
+	.reg .u32 %r13;
+	.reg .u32 %r14;
+	.reg .pred %p15;
+	.reg .u32 %r16;
+	.reg .u32 %r17;
+	.reg .u32 %r18;
+	.reg .u32 %r19;
+	.reg .u32 %r20;
+	.reg .u64 %r21;
+	.reg .u64 %r22;
+	.reg .u64 %r23;
+	.reg .u64 %r24;
+	.reg .u64 %r25;
+	.reg .f32 %r26;
+	.reg .u32 %r27;
+	.reg .u64 %r28;
+	.reg .u64 %r29;
+	.reg .u64 %r30;
+	.reg .f32 %r31;
+	.reg .u32 %r32;
+	.reg .u32 %r33;
+	.reg .u64 %r34;
+	.reg .u64 %r35;
+	.reg .u64 %r36;
+	.reg .f32 %r37;
+	.reg .f32 %r38;
+	.reg .f32 %r39;
+	.reg .u32 %r40;
+	.reg .pred %p41;
+	.reg .u64 %r42;
+	.reg .u64 %r43;
+	.reg .u64 %r44;
+	.reg .u64 %r45;
+	.reg .f32 %r46;
+	.reg .u64 %r47;
+	.reg .f32 %r48;
+	.reg .u64 %r49;
+	.reg .u64 %r50;
+	.reg .u64 %r51;
+	.reg .f32 %r52;
+	.reg .f32 %r53;
+	.reg .f32 %r54;
+	BB_2_0:
+	BB_2_2:
+		mov.u16 %r0, %ctaid.x; 
+		mov.u16 %r1, %ntid.x; 
+		mul.wide.u16 %r2, %r0, %r1; 
+		ld.param.s32 %r3, [__cudaparm__Z4Fan2PfS_S_iii_t]; 
+		ld.param.s32 %r4, [__cudaparm__Z4Fan2PfS_S_iii_Size]; 
+		sub.s32 %r5, %r4, %r3; 
+		cvt.u32.u16 %r6, %tid.x; 
+		add.u32 %r7, %r6, %r2; 
+		sub.u32 %r8, %r5, 1; 
+		setp.lt.u32 %p9, %r7, %r8; 
+		@%p9 bra BB_2_4; 
+	BB_2_3:
+		bra.uni BB_2_8; 
+	BB_2_4:
+		mov.u16 %r10, %ctaid.y; 
+		mov.u16 %r11, %ntid.y; 
+		mul.wide.u16 %r12, %r10, %r11; 
+		cvt.u32.u16 %r13, %tid.y; 
+		add.u32 %r14, %r13, %r12; 
+		setp.gt.u32 %p15, %r5, %r14; 
+		@%p15 bra BB_2_6; 
+	BB_2_5:
+		bra.uni BB_2_8; 
+	BB_2_6:
+		ld.param.s32 %r3, [__cudaparm__Z4Fan2PfS_S_iii_t]; 
+		add.s32 %r16, %r3, %r7; 
+		add.s32 %r17, %r3, %r14; 
+		add.s32 %r18, %r16, 1; 
+		ld.param.s32 %r4, [__cudaparm__Z4Fan2PfS_S_iii_Size]; 
+		mul.lo.s32 %r19, %r18, %r4; 
+		add.s32 %r20, %r17, %r19; 
+		cvt.s64.s32 %r21, %r20; 
+		mul.wide.s32 %r22, %r20, 4; 
+		ld.param.u64 %r23, [__cudaparm__Z4Fan2PfS_S_iii_a_cuda]; 
+		add.u64 %r24, %r22, %r23; 
+		ld.param.u64 %r25, [__cudaparm__Z4Fan2PfS_S_iii_m_cuda]; 
+		ld.global.f32 %r26, [%r24]; 
+		add.s32 %r27, %r19, %r3; 
+		cvt.s64.s32 %r28, %r27; 
+		mul.wide.s32 %r29, %r27, 4; 
+		add.u64 %r30, %r25, %r29; 
+		ld.global.f32 %r31, [%r30]; 
+		mul.lo.s32 %r32, %r3, %r4; 
+		add.s32 %r33, %r17, %r32; 
+		cvt.s64.s32 %r34, %r33; 
+		mul.wide.s32 %r35, %r33, 4; 
+		add.u64 %r36, %r23, %r35; 
+		ld.global.f32 %r37, [%r36]; 
+		mul.f32 %r38, %r31, %r37; 
+		sub.f32 %r39, %r26, %r38; 
+		st.global.f32 [%r24], %r39; 
+		mov.u32 %r40, 0; 
+		setp.ne.s32 %p41, %r14, %r40; 
+		@%p41 bra BB_2_8; 
+	BB_2_7:
+		ld.param.u64 %r42, [__cudaparm__Z4Fan2PfS_S_iii_b_cuda]; 
+		cvt.s64.s32 %r43, %r16; 
+		mul.wide.s32 %r44, %r16, 4; 
+		add.u64 %r45, %r42, %r44; 
+		ld.global.f32 %r46, [%r45 + 4]; 
+		ld.param.u64 %r25, [__cudaparm__Z4Fan2PfS_S_iii_m_cuda]; 
+		add.u64 %r47, %r22, %r25; 
+		ld.global.f32 %r48, [%r47]; 
+		ld.param.s32 %r3, [__cudaparm__Z4Fan2PfS_S_iii_t]; 
+		cvt.s64.s32 %r49, %r3; 
+		mul.wide.s32 %r50, %r3, 4; 
+		add.u64 %r51, %r42, %r50; 
+		ld.global.f32 %r52, [%r51]; 
+		mul.f32 %r53, %r48, %r52; 
+		sub.f32 %r54, %r46, %r53; 
+		st.global.f32 [%r45 + 4], %r54; 
+	BB_2_8:
+		exit; 
+	BB_2_1:
+}
+.entry _Z4Fan1PfS_ii(.param  .u64 __cudaparm__Z4Fan1PfS_ii_m_cuda,
+		.param  .u64 __cudaparm__Z4Fan1PfS_ii_a_cuda,
+		.param  .s32 __cudaparm__Z4Fan1PfS_ii_Size,
+		.param  .s32 __cudaparm__Z4Fan1PfS_ii_t)
+{
+
+	.reg .u16 %r0;
+	.reg .u16 %r1;
+	.reg .u32 %r2;
+	.reg .u32 %r3;
+	.reg .u32 %r4;
+	.reg .u32 %r5;
+	.reg .u32 %r6;
+	.reg .u32 %r7;
+	.reg .u32 %r8;
+	.reg .pred %p9;
+	.reg .u64 %r10;
+	.reg .u32 %r11;
+	.reg .u32 %r12;
+	.reg .u32 %r13;
+	.reg .u64 %r14;
+	.reg .u64 %r15;
+	.reg .u64 %r16;
+	.reg .u64 %r17;
+	.reg .u64 %r18;
+	.reg .f32 %r19;
+	.reg .u32 %r20;
+	.reg .u64 %r21;
+	.reg .u64 %r22;
+	.reg .u64 %r23;
+	.reg .u64 %r24;
+	.reg .f32 %r25;
+	.reg .f32 %r26;
+	.reg .u64 %r27;
+	.reg .u64 %r28;
+	BB_1_0:
+	BB_1_2:
+		mov.u16 %r0, %ctaid.x; 
+		mov.u16 %r1, %ntid.x; 
+		mul.wide.u16 %r2, %r0, %r1; 
+		cvt.u32.u16 %r3, %tid.x; 
+		add.u32 %r4, %r3, %r2; 
+		ld.param.s32 %r5, [__cudaparm__Z4Fan1PfS_ii_t]; 
+		ld.param.s32 %r6, [__cudaparm__Z4Fan1PfS_ii_Size]; 
+		sub.s32 %r7, %r6, %r5; 
+		sub.u32 %r8, %r7, 1; 
+		setp.lt.u32 %p9, %r4, %r8; 
+		@%p9 bra BB_1_4; 
+	BB_1_3:
+		bra.uni BB_1_5; 
+	BB_1_4:
+		ld.param.s32 %r5, [__cudaparm__Z4Fan1PfS_ii_t]; 
+		cvt.s64.s32 %r10, %r5; 
+		add.u32 %r11, %r5, %r4; 
+		add.u32 %r12, %r11, 1; 
+		ld.param.s32 %r6, [__cudaparm__Z4Fan1PfS_ii_Size]; 
+		mul.lo.u32 %r13, %r6, %r12; 
+		cvt.u64.u32 %r14, %r13; 
+		add.u64 %r15, %r10, %r14; 
+		mul.lo.u64 %r16, %r15, 4; 
+		ld.param.u64 %r17, [__cudaparm__Z4Fan1PfS_ii_a_cuda]; 
+		add.u64 %r18, %r16, %r17; 
+		ld.global.f32 %r19, [%r18]; 
+		mul.lo.s32 %r20, %r5, %r6; 
+		cvt.s64.s32 %r21, %r20; 
+		add.u64 %r22, %r21, %r10; 
+		mul.lo.u64 %r23, %r22, 4; 
+		add.u64 %r24, %r17, %r23; 
+		ld.global.f32 %r25, [%r24]; 
+		div.full.f32 %r26, %r19, %r25; 
+		ld.param.u64 %r27, [__cudaparm__Z4Fan1PfS_ii_m_cuda]; 
+		add.u64 %r28, %r27, %r16; 
+		st.global.f32 [%r28], %r26; 
+	BB_1_5:
+		exit; 
+	BB_1_1:
+}
+
+

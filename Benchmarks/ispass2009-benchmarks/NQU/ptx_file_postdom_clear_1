@@ -1,0 +1,348 @@
+/*
+* Ocelot Version : 2.1.0
+*/
+
+.version 3.1
+.target sm_20
+.address_size 64
+/* Module /home/vishwesh/Desktop/Register_Sharing_Pbm/Results/PTX_FILES/NQU/ptx_org */
+
+/* Function prototypes */
+.entry _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i (.param  .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n, .param  .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark, .param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks, .param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks, .param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks, .param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results, .param  .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions);
+
+/* Globals */
+
+/* Textures */
+
+/* Kernels */
+.entry _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(.param  .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n,
+		.param  .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark,
+		.param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks,
+		.param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks,
+		.param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks,
+		.param  .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results,
+		.param  .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions)
+{
+	.shared .align 4 .b8 __cuda___cuda_local_var_34924_39_non_const_sum44[256];
+	.shared .align 4 .b8 __cuda___cuda_local_var_34919_39_non_const_mask300[2560];
+	.shared .align 4 .b8 __cuda___cuda_local_var_34921_39_non_const_r_mask2860[2560];
+	.shared .align 4 .b8 __cuda___cuda_local_var_34920_39_non_const_l_mask5420[2560];
+	.shared .align 4 .b8 __cuda___cuda_local_var_34922_39_non_const_m7980[2560];
+
+	.reg .u32 %r0;
+	.reg .u32 %r1;
+	.reg .u32 %r2;
+	.reg .u32 %r3;
+	.reg .u64 %r4;
+	.reg .u32 %r5;
+	.reg .u64 %r6;
+	.reg .u64 %r7;
+	.reg .u64 %r8;
+	.reg .u32 %r9;
+	.reg .pred %p10;
+	.reg .u64 %r11;
+	.reg .u64 %r12;
+	.reg .u64 %r13;
+	.reg .u64 %r14;
+	.reg .u64 %r15;
+	.reg .u64 %r16;
+	.reg .u64 %r17;
+	.reg .u64 %r18;
+	.reg .u64 %r19;
+	.reg .u32 %r20;
+	.reg .u64 %r21;
+	.reg .u64 %r22;
+	.reg .u64 %r23;
+	.reg .u32 %r24;
+	.reg .u64 %r25;
+	.reg .u64 %r26;
+	.reg .u64 %r27;
+	.reg .u32 %r28;
+	.reg .u64 %r29;
+	.reg .u32 %r30;
+	.reg .u32 %r31;
+	.reg .u64 %r32;
+	.reg .u32 %r33;
+	.reg .u32 %r34;
+	.reg .u32 %r35;
+	.reg .u64 %r36;
+	.reg .u64 %r37;
+	.reg .u32 %r38;
+	.reg .u32 %r39;
+	.reg .u64 %r40;
+	.reg .u64 %r41;
+	.reg .u64 %r42;
+	.reg .u32 %r43;
+	.reg .u32 %r44;
+	.reg .pred %p45;
+	.reg .u32 %r46;
+	.reg .u32 %r47;
+	.reg .u32 %r48;
+	.reg .u32 %r49;
+	.reg .u32 %r50;
+	.reg .u32 %r51;
+	.reg .pred %p52;
+	.reg .u32 %r53;
+	.reg .u32 %r54;
+	.reg .pred %p55;
+	.reg .u64 %r56;
+	.reg .u32 %r57;
+	.reg .u32 %r58;
+	.reg .u64 %r59;
+	.reg .u32 %r60;
+	.reg .u32 %r61;
+	.reg .u32 %r62;
+	.reg .u64 %r63;
+	.reg .u32 %r64;
+	.reg .u32 %r65;
+	.reg .u32 %r66;
+	.reg .u32 %r67;
+	.reg .u32 %r68;
+	.reg .u32 %r69;
+	.reg .pred %p70;
+	.reg .u32 %r71;
+	.reg .u32 %r72;
+	.reg .pred %p73;
+	.reg .u32 %r74;
+	.reg .u32 %r75;
+	.reg .u32 %r76;
+	.reg .u32 %r77;
+	.reg .pred %p78;
+	.reg .u32 %r79;
+	.reg .u32 %r80;
+	.reg .u32 %r81;
+	.reg .u32 %r82;
+	.reg .pred %p83;
+	.reg .u32 %r84;
+	.reg .u32 %r85;
+	.reg .u32 %r86;
+	.reg .u32 %r87;
+	.reg .pred %p88;
+	.reg .u32 %r89;
+	.reg .u32 %r90;
+	.reg .u32 %r91;
+	.reg .u32 %r92;
+	.reg .pred %p93;
+	.reg .u32 %r94;
+	.reg .u32 %r95;
+	.reg .u32 %r96;
+	.reg .u32 %r97;
+	.reg .pred %p98;
+	.reg .u32 %r99;
+	.reg .u32 %r100;
+	.reg .u32 %r101;
+	.reg .u32 %r102;
+	.reg .pred %p103;
+	.reg .u32 %r104;
+	.reg .u32 %r105;
+	.reg .u32 %r106;
+	.reg .u32 %r107;
+	.reg .pred %p108;
+	.reg .u32 %r109;
+	.reg .u64 %r110;
+	.reg .u64 %r111;
+	.reg .u64 %r112;
+	.reg .u64 %r113;
+	BB_1_0:
+	BB_1_2:
+		cvt.s32.u32 %r0, %ctaid.x; 
+		mov.u32 %r1, %ntid.x; 
+		mul.lo.u32 %r2, %r0, %r1; 
+		cvt.s32.u32 %r3, %tid.x; 
+		cvt.s64.s32 %r4, %r3; 
+		add.u32 %r5, %r3, %r2; 
+		mov.u64 %r6, __cuda___cuda_local_var_34924_39_non_const_sum44; 
+		mul.wide.s32 %r7, %r3, 4; 
+		add.u64 %r8, %r6, %r7; 
+		ld.param.s32 %r9, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions]; 
+		setp.le.s32 %p10, %r9, %r5; 
+		@%p10 bra BB_1_13; 
+	BB_1_3:
+		mov.u64 %r11, __cuda___cuda_local_var_34919_39_non_const_mask300; 
+		mov.u64 %r12, __cuda___cuda_local_var_34921_39_non_const_r_mask2860; 
+		mov.u64 %r13, __cuda___cuda_local_var_34920_39_non_const_l_mask5420; 
+		mov.u64 %r14, __cuda___cuda_local_var_34922_39_non_const_m7980; 
+		mul.lo.u64 %r15, %r4, 40; 
+		cvt.s64.s32 %r16, %r5; 
+		mul.wide.s32 %r17, %r5, 4; 
+		ld.param.u64 %r18, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks]; 
+		add.u64 %r19, %r18, %r17; 
+		ld.global.u32 %r20, [%r19]; 
+		add.u64 %r21, %r15, %r11; 
+		st.shared.u32 [%r21], %r20; 
+		ld.param.u64 %r22, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks]; 
+		add.u64 %r23, %r22, %r17; 
+		ld.global.u32 %r24, [%r23]; 
+		add.u64 %r25, %r15, %r13; 
+		st.shared.u32 [%r25], %r24; 
+		ld.param.u64 %r26, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks]; 
+		add.u64 %r27, %r26, %r17; 
+		ld.global.u32 %r28, [%r27]; 
+		add.u64 %r29, %r15, %r12; 
+		st.shared.u32 [%r29], %r28; 
+		or.b32 %r30, %r20, %r24; 
+		or.b32 %r31, %r28, %r30; 
+		add.u64 %r32, %r15, %r14; 
+		st.shared.u32 [%r32], %r31; 
+		ld.param.s32 %r33, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n]; 
+		shl.b32 %r34, 1, %r33; 
+		sub.u32 %r35, %r34, 1; 
+		mov.s64 %r36, 0; 
+		mul.lo.u64 %r37, %r4, 10; 
+		mov.s32 %r38, 0; 
+		mov.s32 %r39, 0; 
+	BB_1_4:
+		add.u64 %r40, %r36, %r37; 
+		mul.lo.u64 %r41, %r40, 4; 
+		add.u64 %r42, %r41, %r14; 
+		ld.shared.u32 %r43, [%r42]; 
+		and.b32 %r44, %r35, %r43; 
+		setp.ne.u32 %p45, %r35, %r44; 
+		@%p45 bra BB_1_6; 
+	BB_1_5:
+		sub.s32 %r38, %r38, 1; 
+		sub.s64 %r36, %r36, 1; 
+		bra.uni BB_1_11; 
+	BB_1_13:
+		mov.u32 %r71, 0; 
+		st.shared.u32 [%r8], %r71; 
+	BB_1_14:
+		bar.sync 0; 
+		mov.u32 %r72, -1; 
+		setp.gt.s32 %p73, %r3, %r72; 
+		@%p73 bra BB_1_16; 
+	BB_1_15:
+		ld.shared.u32 %r74, [%r8]; 
+		ld.shared.u32 %r75, [%r8 + 256]; 
+		add.u32 %r76, %r74, %r75; 
+		st.shared.u32 [%r8], %r76; 
+	BB_1_16:
+		bar.sync 0; 
+		mov.u32 %r77, 31; 
+		setp.gt.s32 %p78, %r3, %r77; 
+		@%p78 bra BB_1_18; 
+	BB_1_17:
+		ld.shared.u32 %r79, [%r8]; 
+		ld.shared.u32 %r80, [%r8 + 128]; 
+		add.u32 %r81, %r79, %r80; 
+		st.shared.u32 [%r8], %r81; 
+	BB_1_18:
+		bar.sync 0; 
+		mov.u32 %r82, 15; 
+		setp.gt.s32 %p83, %r3, %r82; 
+		@%p83 bra BB_1_20; 
+	BB_1_19:
+		ld.shared.u32 %r84, [%r8]; 
+		ld.shared.u32 %r85, [%r8 + 64]; 
+		add.u32 %r86, %r84, %r85; 
+		st.shared.u32 [%r8], %r86; 
+	BB_1_20:
+		bar.sync 0; 
+		mov.u32 %r87, 7; 
+		setp.gt.s32 %p88, %r3, %r87; 
+		@%p88 bra BB_1_22; 
+	BB_1_21:
+		ld.shared.u32 %r89, [%r8]; 
+		ld.shared.u32 %r90, [%r8 + 32]; 
+		add.u32 %r91, %r89, %r90; 
+		st.shared.u32 [%r8], %r91; 
+	BB_1_22:
+		bar.sync 0; 
+		mov.u32 %r92, 3; 
+		setp.gt.s32 %p93, %r3, %r92; 
+		@%p93 bra BB_1_24; 
+	BB_1_23:
+		ld.shared.u32 %r94, [%r8]; 
+		ld.shared.u32 %r95, [%r8 + 16]; 
+		add.u32 %r96, %r94, %r95; 
+		st.shared.u32 [%r8], %r96; 
+	BB_1_24:
+		bar.sync 0; 
+		mov.u32 %r97, 1; 
+		setp.gt.s32 %p98, %r3, %r97; 
+		@%p98 bra BB_1_26; 
+	BB_1_25:
+		ld.shared.u32 %r99, [%r8]; 
+		ld.shared.u32 %r100, [%r8 + 8]; 
+		add.u32 %r101, %r99, %r100; 
+		st.shared.u32 [%r8], %r101; 
+	BB_1_26:
+		bar.sync 0; 
+		mov.u32 %r102, 0; 
+		setp.gt.s32 %p103, %r3, %r102; 
+		@%p103 bra BB_1_28; 
+	BB_1_27:
+		ld.shared.u32 %r104, [%r8]; 
+		ld.shared.u32 %r105, [%r8 + 4]; 
+		add.u32 %r106, %r104, %r105; 
+		st.shared.u32 [%r8], %r106; 
+	BB_1_28:
+		bar.sync 0; 
+		mov.u32 %r107, 0; 
+		setp.ne.s32 %p108, %r3, %r107; 
+		@%p108 bra BB_1_30; 
+	BB_1_29:
+		ld.shared.u32 %r109, [__cuda___cuda_local_var_34924_39_non_const_sum44]; 
+		ld.param.u64 %r110, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results]; 
+		cvt.s64.s32 %r111, %r0; 
+		mul.wide.s32 %r112, %r0, 4; 
+		add.u64 %r113, %r110, %r112; 
+		st.global.u32 [%r113], %r109; 
+	BB_1_30:
+		clear;
+		exit; 
+	BB_1_1:
+	BB_1_6:
+		add.u32 %r46, %r43, 1; 
+		not.b32 %r47, %r43; 
+		and.b32 %r48, %r46, %r47; 
+		or.b32 %r49, %r43, %r48; 
+		st.shared.u32 [%r42], %r49; 
+		and.b32 %r50, %r35, %r48; 
+		mov.u32 %r51, 0; 
+		setp.eq.u32 %p52, %r50, %r51; 
+		@%p52 bra BB_1_10; 
+	BB_1_7:
+		add.s32 %r53, %r38, 1; 
+		ld.param.s32 %r54, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark]; 
+		setp.ne.s32 %p55, %r54, %r53; 
+		@%p55 bra BB_1_9; 
+	BB_1_8:
+		add.s32 %r39, %r39, 1; 
+		sub.s32 %r38, %r38, 1; 
+		sub.s64 %r36, %r36, 1; 
+		bra.uni BB_1_11; 
+	BB_1_10:
+		sub.s32 %r38, %r38, 1; 
+		sub.s64 %r36, %r36, 1; 
+	BB_1_11:
+		mov.u32 %r69, 0; 
+		setp.ge.s32 %p70, %r38, %r69; 
+		@%p70 bra BB_1_4; 
+	BB_1_12:
+		st.shared.u32 [%r8], %r39; 
+		bra.uni BB_1_14; 
+	BB_1_9:
+		add.u64 %r56, %r41, %r11; 
+		ld.shared.u32 %r57, [%r56]; 
+		or.b32 %r58, %r57, %r48; 
+		st.shared.u32 [%r56 + 4], %r58; 
+		add.u64 %r59, %r41, %r13; 
+		ld.shared.u32 %r60, [%r59]; 
+		or.b32 %r61, %r60, %r48; 
+		shl.b32 %r62, %r61, 1; 
+		st.shared.u32 [%r59 + 4], %r62; 
+		add.u64 %r63, %r41, %r12; 
+		ld.shared.u32 %r64, [%r63]; 
+		or.b32 %r65, %r64, %r48; 
+		shr.u32 %r66, %r65, 1; 
+		st.shared.u32 [%r63 + 4], %r66; 
+		or.b32 %r67, %r58, %r62; 
+		or.b32 %r68, %r66, %r67; 
+		st.shared.u32 [%r42 + 4], %r68; 
+		mov.s32 %r38, %r53; 
+		add.s64 %r36, %r36, 1; 
+		bra.uni BB_1_11; 
+}
+
+

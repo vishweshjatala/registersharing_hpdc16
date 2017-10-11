@@ -1,0 +1,149 @@
+/*
+* Ocelot Version : 2.1.0
+*/
+
+.version 3.1
+.target sm_20
+.address_size 64
+/* Module /home/vishwesh/Desktop/Register_Sharing_Pbm/Results/PTX_FILES/BFS/ptx_org */
+
+/* Function prototypes */
+.entry _Z6KernelP4NodePiPbS2_S1_S2_i (.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_nodes, .param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_edges, .param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_mask, .param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_visited, .param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_cost, .param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_over, .param  .s32 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_no_of_nodes);
+
+/* Globals */
+
+/* Textures */
+
+/* Kernels */
+.entry _Z6KernelP4NodePiPbS2_S1_S2_i(.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_nodes,
+		.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_edges,
+		.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_mask,
+		.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_visited,
+		.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_cost,
+		.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_over,
+		.param  .s32 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_no_of_nodes)
+{
+
+	.reg .u32 %r0;
+	.reg .u32 %r1;
+	.reg .u32 %r2;
+	.reg .u32 %r3;
+	.reg .u32 %r4;
+	.reg .pred %p5;
+	.reg .u64 %r6;
+	.reg .u64 %r7;
+	.reg .u64 %r8;
+	.reg .u32 %r9;
+	.reg .u32 %r10;
+	.reg .pred %p11;
+	.reg .u32 %r12;
+	.reg .u64 %r13;
+	.reg .u32 %r14;
+	.reg .u64 %r15;
+	.reg .u64 %r16;
+	.reg .u64 %r17;
+	.reg .u64 %r18;
+	.reg .u32 %r19;
+	.reg .u32 %r20;
+	.reg .u32 %r21;
+	.reg .u32 %r22;
+	.reg .pred %p23;
+	.reg .u64 %r24;
+	.reg .u64 %r25;
+	.reg .u64 %r26;
+	.reg .u64 %r27;
+	.reg .u32 %r28;
+	.reg .u64 %r29;
+	.reg .u64 %r30;
+	.reg .u32 %r31;
+	.reg .u32 %r32;
+	.reg .pred %p33;
+	.reg .u64 %r34;
+	.reg .u64 %r35;
+	.reg .u64 %r36;
+	.reg .u32 %r37;
+	.reg .u32 %r38;
+	.reg .u64 %r39;
+	.reg .u64 %r40;
+	.reg .u32 %r41;
+	.reg .u64 %r42;
+	.reg .u32 %r43;
+	.reg .u64 %r44;
+	.reg .u32 %r45;
+	.reg .u32 %r46;
+	.reg .pred %p47;
+	BB_1_0:
+	BB_1_2:
+		mov.u32 %r0, %ctaid.x; 
+		mul.lo.u32 %r1, %r0, 256; 
+		mov.u32 %r2, %tid.x; 
+		add.u32 %r3, %r2, %r1; 
+		ld.param.s32 %r4, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_no_of_nodes]; 
+		setp.le.s32 %p5, %r4, %r3; 
+		@%p5 bra BB_1_9; 
+	BB_1_3:
+		cvt.s64.s32 %r6, %r3; 
+		ld.param.u64 %r7, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_mask]; 
+		add.u64 %r8, %r6, %r7; 
+		ld.global.s8 %r9, [%r8]; 
+		mov.u32 %r10, 0; 
+		setp.eq.s32 %p11, %r9, %r10; 
+		@%p11 bra BB_1_9; 
+	BB_1_4:
+		mov.s32 %r12, 0; 
+		st.global.s8 [%r8], %r12; 
+		ld.param.u64 %r13, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_visited]; 
+		mov.s32 %r14, 1; 
+		add.u64 %r15, %r6, %r13; 
+		st.global.s8 [%r15], %r14; 
+		ld.param.u64 %r16, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_nodes]; 
+		mul.lo.u64 %r17, %r6, 8; 
+		add.u64 %r18, %r16, %r17; 
+		ld.global.s32 %r19, [%r18]; 
+		mov.s32 %r20, %r19; 
+		ld.global.s32 %r21, [%r18 + 4]; 
+		add.s32 %r22, %r21, %r19; 
+		setp.le.s32 %p23, %r22, %r19; 
+		@%p23 bra BB_1_9; 
+	BB_1_5:
+		ld.param.u64 %r24, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_edges]; 
+		cvt.s64.s32 %r25, %r19; 
+		mul.wide.s32 %r26, %r19, 4; 
+		add.u64 %r27, %r24, %r26; 
+	BB_1_6:
+		ld.global.s32 %r28, [%r27]; 
+		cvt.s64.s32 %r29, %r28; 
+		add.u64 %r30, %r29, %r13; 
+		ld.global.s8 %r31, [%r30]; 
+		mov.u32 %r32, 0; 
+		setp.ne.s32 %p33, %r31, %r32; 
+		@%p33 bra BB_1_8; 
+	BB_1_7:
+		ld.param.u64 %r34, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_cost]; 
+		mul.lo.u64 %r35, %r6, 4; 
+		add.u64 %r36, %r34, %r35; 
+		ld.global.s32 %r37, [%r36]; 
+		add.s32 %r38, %r37, 1; 
+		mul.lo.u64 %r39, %r29, 4; 
+		add.u64 %r40, %r34, %r39; 
+		st.global.s32 [%r40], %r38; 
+		mov.s32 %r41, 1; 
+		add.u64 %r42, %r29, %r7; 
+		st.global.s8 [%r42], %r41; 
+		mov.s32 %r43, 1; 
+		ld.param.u64 %r44, [__cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_over]; 
+		st.global.s8 [%r44], %r43; 
+		ld.global.s32 %r45, [%r18]; 
+		ld.global.s32 %r46, [%r18 + 4]; 
+		add.s32 %r22, %r45, %r46; 
+	BB_1_8:
+		add.s32 %r20, %r20, 1; 
+		add.u64 %r27, %r27, 4; 
+		setp.gt.s32 %p47, %r22, %r20; 
+		@%p47 bra BB_1_6; 
+	BB_1_9:
+		exit; 
+	BB_1_1:
+}
+
+

@@ -1,0 +1,1 @@
+./kmeans -o -i ../../data/kmeans/inpuGen/100000_34.txt -t 2500

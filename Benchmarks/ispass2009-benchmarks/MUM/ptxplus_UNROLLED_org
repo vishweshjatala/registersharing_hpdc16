@@ -1,0 +1,509 @@
+//HEADER
+.version 1.4+
+.target sm_10, map_f64_to_f32
+.tex .u64 nodetex;
+.tex .u64 childrentex;
+.tex .u64 reftex;
+//END HEADER
+
+
+//INSTRUCTIONS
+
+.const .u32 constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[12] = {
+          0xffff0000, 0x0000ffff, 0x00010000, 0x00000041, 
+          0x00000043, 0x00000047, 0x00000054, 0x00000071, 
+          0x0000001f, 0x00000003, 0x00008000, 0x00000001
+};
+
+.const .u32 constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[11] = {
+          0xffff0000, 0x0000ffff, 0x00010000, 0x00000041, 
+          0x00000043, 0x00000047, 0x00000054, 0x0000001f, 
+          0x00000003, 0x00000001, 0xffffffff
+};
+
+
+
+
+.local .b8 l1[0];
+.local .b8 l2[0];
+
+.entry  _Z15mummergpuKernelP10MatchCoordPcPKiS3_ii (
+	.param  .u64 __cudaparm__Z15mummergpuKernelP10MatchCoordPcPKiS3_ii_match_coords ,
+	.param  .u64 __cudaparm__Z15mummergpuKernelP10MatchCoordPcPKiS3_ii___val_paramqueries ,
+	.param  .u64 __cudaparm__Z15mummergpuKernelP10MatchCoordPcPKiS3_ii_queryAddrs ,
+	.param  .u64 __cudaparm__Z15mummergpuKernelP10MatchCoordPcPKiS3_ii_queryLengths ,
+	.param  .s32 __cudaparm__Z15mummergpuKernelP10MatchCoordPcPKiS3_ii_numQueries ,
+	.param  .s32 __cudaparm__Z15mummergpuKernelP10MatchCoordPcPKiS3_ii_min_match_len )
+{
+	.reg .u32 $r<16>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	cvt.u32.u16 $r1, %ctaid.x;
+	cvt.u32.u16 $r2, %ntid.x;
+	cvt.u32.u16 $r0, $r0.lo;
+	mad24.lo.u32 $r0, $r1, $r2, $r0;
+	set.gt.s32.s32 $p0/$o127, s[0x0030], $r0;
+	@$p0.equ retp;
+	shl.u32 $r2, $r0, 0x00000002;
+	add.u32 $r3, s[0x0034], 0x00000001;
+	add.u32 $r1, s[0x0020], $r2;
+	ld.global.u32 $r1, [$r1];
+	mul24.lo.u32 $r3, $r0, $r3;
+	add.half.u32 $r0, s[0x0028], $r2;
+	ld.global.u32 $r0, [$r0];
+	shl.u32 $r2, $r1, 0x00000003;
+	shl.u32 $r3, $r3, 0x00000003;
+	add.u32 $r2, s[0x0010], $r2;
+	add.u32 $p0|$r0, -s[0x0034], $r0;
+	add.u32 $r7, $r2, -$r3;
+	mov.u32 $r2, $r124;
+	@$p0.sf retp;
+	add.u32 $r9, $r0, 0x00000001;
+	add.u32 $r8, s[0x0018], $r1;
+	mov.u32 $r4, $r124;
+	mov.u32 $r5, $r124;
+	mov.u32 $r6, $r124;
+	l0x000000c0: set.le.s32.s32 $p0/$o127, $r5, $r124;
+	@$p0.eq set.eq.u32.u32 $p0/$o127, $r2, $r124;
+	@$p0.neu and.b32 $r0, $r2, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0000];
+	@$p0.neu and.b32 $r0, $r0, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	@$p0.neu mov.u32 $r5, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0024];
+	@$p0.neu mov.u32 $r6, $r124;
+	@$p0.neu or.b32 $r2, $r0, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0008];
+	add.half.u32 $r10, $r8, $r4;
+	add.half.u32 $r0, $r10, $r5;
+	ld.global.s8 $r0, [$r0];
+	cvt.s32.s16 $p0|$r13, $r0.lo;
+	nop;
+	mov.u32 $r11, $r5;
+	@$p0.eq bra l0x000004a0;
+	l0x00000128: and.b32 $r15, $r2, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	shr.u32 $r14, $r2, 0x00000010;
+	cvt.f32.u32 $r0, $r15;
+	cvt.f32.u32 $r1, $r14;
+	mov.u32 $r12, $r2;
+	set.eq.s32.s32 $p0/$o127, $r13, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x000c];
+	ssy 0x000001e0;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , nodetex,{ $r0,_,_,_};
+	@$p0.ne bra l0x000001b0;
+	set.eq.s32.s32 $p0/$o127, $r13, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0010];
+	@$p0.ne bra l0x000001c0;
+	set.eq.s32.s32 $p0/$o127, $r13, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0014];
+	@$p0.ne bra l0x000001d0;
+	set.eq.s32.s32 $p0/$o127, $r13, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0018];
+	@$p0.ne bra l0x000001d8;
+	mov.u32 $r2, $r124;
+	bra l0x000001e0;
+	l0x000001b0: mov.u32 $r2, $r0;
+	bra l0x000001e0;
+	l0x000001c0: mov.u32 $r2, $r1;
+	bra l0x000001e0;
+	l0x000001d0: bra l0x000001e0;
+	l0x000001d8: mov.u32 $r2, $r3;
+	l0x000001e0: set.ne.u32.u32 $p0/$o127, $r2, $r124;
+	@$p0.ne bra l0x00000290;
+	st.local.u32 [0x0000], $r12;
+	set.ge.s32.s32 $p0/$o127, s[0x0034], $r5;
+	ssy 0x00000270;
+	mov.half.u32 $r0, $r15;
+	mov.half.u32 $r1, $r14;
+	@$p0.ne bra l0x00000270;
+	shl.u32 $r3, $r15, 0x00000005;
+	and.b32 $r2, $r14, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x001c];
+	shr.u32 $r6, $r14, 0x00000005;
+	add.u32 $r3, $r2, $r3;
+	shl.u32 $r6, $r6, 0x00000011;
+	shl.u32 $r2, $r4, 0x00000003;
+	add.half.u32 $r6, $r3, $r6;
+	add.half.u32 $r3, $r7, $r2;
+	st.global.u32 [$r3], $r6;
+	mov.u16 $r2.lo, 0x00000000;
+	add.u32 $r3, $r3, 0x00000004;
+	st.global.s16 [$r3], $r2;
+	l0x00000270: nop;
+	add.u32 $r5, $r5, 0xffffffff;
+	mov.u32 $r6, $r124;
+	bra l0x00000568;
+	l0x00000290: shr.u32 $r0, $r2, 0x00000010;
+	cvt.f32.u32 $r1, $r0;
+	cvt.f32.u16 $r0, $r2.lo;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , childrentex,{ $r0,_,_,_};
+	st.local.u32 [0x0010], $r0;
+	st.local.u32 [0x0014], $r1;
+	ld.local.u32 $r3, [0x0014];
+	ld.local.u32 $r14, [0x0010];
+	set.eq.s32.s32 $p0/$o127, $r6, $r124;
+	ssy 0x00000368;
+	@$p0.ne bra l0x00000350;
+	add.u32 $r0, $r3, -$r14;
+	add.u32 $r1, $r0, 0x00000001;
+	set.lt.s32.s32 $p0/$o127, $r6, $r1;
+	@$p0.equ add.u32 $r1, $r0, $r5;
+	@$p0.equ add.u32 $r0, -$r0, $r6;
+	@$p0.equ add.u32 $r15, $r3, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0024];
+	@$p0.equ add.u32 $r5, $r1, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0024];
+	@$p0.equ add.u32 $r6, $r0, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0028];
+	@$p0.ne add.u32 $r5, $r5, $r6;
+	@$p0.ne add.u32 $r15, $r6, $r14;
+	@$p0.ne mov.u32 $r6, $r124;
+	mov.u32 $r11, $r5;
+	bra l0x00000368;
+	l0x00000350: add.u32 $r5, $r5, 0x00000001;
+	add.u32 $r11, $r11, 0x00000001;
+	add.u32 $r15, $r14, 0x00000001;
+	l0x00000368: add.u32 $r0, $r11, $r10;
+	ld.global.s8 $r0, [$r0];
+	cvt.s32.s16 $r13, $r0.lo;
+	set.lt.s32.s32 $p1/$o127, $r3, $r15;
+	ssy 0x00000480;
+	set.ne.s32.s32 $p0/$o127, $r13, $r124;
+	@$p1.ne bra l0x00000480;
+	@$p0.eq bra l0x00000480;
+	l0x000003a8: shr.s32 $r1, $r15, 0x00000012;
+	and.b32 $r0, $r15, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0020];
+	shl.u32 $r1, $r1, 0x00000002;
+	add.u32 $r1, $r0, $r1;
+	shr.s32 $r0, $r15, 0x00000002;
+	and.b32 $r0, $r0, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	cvt.f32.s32 $r0, $r0;
+	cvt.f32.s32 $r1, $r1;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , reftex,{ $r0,_,_,_};
+	cvt.s32.s32 $r0, $r0;
+	set.eq.s32.s32 $p0/$o127, $r13, $r0;
+	@$p0.ne bra l0x00000418;
+	st.local.u32 [0x0000], $r12;
+	bra l0x000004b8;
+	l0x00000418: add.u32 $r11, $r11, 0x00000001;
+	add.u32 $r0, $r11, $r10;
+	ld.global.s8 $r0, [$r0];
+	add.u32 $r15, $r15, 0x00000001;
+	set.lt.s32.s32 $p0/$o127, $r3, $r15;
+	add.u32 $r5, $r5, 0x00000001;
+	cvt.s32.s16 $r13, $r0.lo;
+	@$p0.ne bra l0x00000478;
+	set.ne.s32.s32 $p1/$r0, $r13, $r124;
+	cvt.s32.s32 $p0|$o127, $r0;
+	@$p1.ne bra l0x000003a8;
+	bra l0x00000480;
+	l0x00000478: set.ne.s32.s32 $p0/$o127, $r13, $r124;
+	l0x00000480: nop;
+	@$p0.ne bra l0x00000128;
+	st.local.u32 [0x0000], $r12;
+	bra l0x000004b8;
+	l0x000004a0: ld.local.u32 $r12, [0x0000];
+	ld.local.u32 $r14, [0x0010];
+	mov.u32 $r15, $r124;
+	l0x000004b8: set.ge.s32.s32 $p0/$o127, s[0x0034], $r5;
+	add.u32 $r6, $r15, -$r14;
+	ssy 0x00000540;
+	@$p0.ne bra l0x00000540;
+	shr.u32 $r0, $r2, 0x00000010;
+	and.b32 $r1, $r2, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	and.b32 $r0, $r0, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x001c];
+	shl.u32 $r1, $r1, 0x00000005;
+	shr.u32 $r2, $r2, 0x00000015;
+	add.u32 $r1, $r0, $r1;
+	shl.u32 $r2, $r2, 0x00000011;
+	shl.u32 $r0, $r4, 0x00000003;
+	add.half.u32 $r2, $r1, $r2;
+	add.half.u32 $r1, $r7, $r0;
+	st.global.u32 [$r1], $r2;
+	mov.u16 $r0.lo, $r6.lo;
+	add.u32 $r1, $r1, 0x00000004;
+	st.global.s16 [$r1], $r0;
+	l0x00000540: add.u32 $r2, -$r6, $r5;
+	and.b32 $r0, $r12, constant1_Z15mummergpuKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	shr.u32 $r1, $r12, 0x00000010;
+	add.u32 $r5, $r2, 0xffffffff;
+	bra l0x00000568;
+	l0x00000568: cvt.f32.u32 $r0, $r0;
+	cvt.f32.u32 $r1, $r1;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , childrentex,{ $r0,_,_,_};
+	add.u32 $r4, $r4, 0x00000001;
+	st.local.u32 [0x0010], $r0;
+	set.ne.s32.s32 $p0/$o127, $r9, $r4;
+	st.local.u32 [0x0014], $r1;
+	@$p0.ne bra l0x000000c0;
+	nop;
+
+	l_exit: exit;
+}
+
+.entry  _Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii (
+	.param  .u64 __cudaparm__Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii_match_coords ,
+	.param  .u64 __cudaparm__Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii___val_paramqueries ,
+	.param  .u64 __cudaparm__Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii_queryAddrs ,
+	.param  .u64 __cudaparm__Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii_queryLengths ,
+	.param  .s32 __cudaparm__Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii_numQueries ,
+	.param  .s32 __cudaparm__Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii_min_match_len )
+{
+	.reg .u32 $r<14>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	cvt.u32.u16 $r1, %ctaid.x;
+	cvt.u32.u16 $r2, %ntid.x;
+	cvt.u32.u16 $r0, $r0.lo;
+	mad24.lo.u32 $r0, $r1, $r2, $r0;
+	set.gt.s32.s32 $p0/$o127, s[0x0030], $r0;
+	@$p0.equ retp;
+	shl.u32 $r2, $r0, 0x00000002;
+	add.u32 $r3, s[0x0034], 0x00000001;
+	add.u32 $r1, s[0x0020], $r2;
+	ld.global.u32 $r1, [$r1];
+	mul24.lo.u32 $r3, $r0, $r3;
+	add.half.u32 $r0, s[0x0028], $r2;
+	ld.global.u32 $r4, [$r0];
+	shl.u32 $r0, $r1, 0x00000003;
+	shl.u32 $r2, $r3, 0x00000003;
+	add.u32 $r0, s[0x0010], $r0;
+	set.gt.s32.s32 $p0/$o127, s[0x0034], $r4;
+	add.u32 $r5, $r0, -$r2;
+	@$p0.ne retp;
+	ld.local.u32 $r2, [0x0000];
+	add.u32 $r6, s[0x0018], $r1;
+	add.u32 $r7, s[0x0034], 0xffffffff;
+	mov.u32 $r8, $r124;
+	mov.u32 $r9, $r124;
+	l0x000000b8: set.le.s32.s32 $p0/$o127, $r8, $r124;
+	@$p0.eq set.eq.u32.u32 $p0/$o127, $r2, $r124;
+	@$p0.neu and.b32 $r0, $r2, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0000];
+	@$p0.neu and.b32 $r0, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	@$p0.neu mov.u32 $r8, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x002c];
+	@$p0.neu mov.u32 $r9, $r124;
+	@$p0.neu or.b32 $r2, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0008];
+	add.half.u32 $r0, $r4, -$r8;
+	add.half.u32 $r0, $r0, $r6;
+	add.u32 $r0, $r0, 0x00000001;
+	ld.global.s8 $r0, [$r0];
+	cvt.s32.s16 $r0, $r0.lo;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x000c];
+	ssy 0x000001b8;
+	@$p0.ne bra l0x00000170;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0010];
+	@$p0.ne bra l0x00000180;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0014];
+	@$p0.ne bra l0x00000190;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0018];
+	@$p0.ne bra l0x000001a0;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x001c];
+	@$p0.ne bra l0x000001b0;
+	bra l0x000001b8;
+	l0x00000170: mov.u32 $r0, 0x00000054;
+	bra l0x000001b8;
+	l0x00000180: mov.u32 $r0, 0x00000047;
+	bra l0x000001b8;
+	l0x00000190: mov.u32 $r0, 0x00000043;
+	bra l0x000001b8;
+	l0x000001a0: mov.u32 $r0, 0x00000041;
+	bra l0x000001b8;
+	l0x000001b0: mov.u32 $r0, $r124;
+	l0x000001b8: set.eq.s32.s32 $p0/$o127, $r0, $r124;
+	nop;
+	mov.u32 $r11, $r0;
+	@$p0.ne bra l0x000006a8;
+	l0x000001d8: and.b32 $r13, $r2, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	shr.u32 $r12, $r2, 0x00000010;
+	cvt.f32.u32 $r0, $r13;
+	cvt.f32.u32 $r1, $r12;
+	mov.u32 $r10, $r2;
+	set.eq.s32.s32 $p0/$o127, $r11, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x000c];
+	ssy 0x00000290;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , nodetex,{ $r0,_,_,_};
+	@$p0.ne bra l0x00000260;
+	set.eq.s32.s32 $p0/$o127, $r11, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0010];
+	@$p0.ne bra l0x00000270;
+	set.eq.s32.s32 $p0/$o127, $r11, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0014];
+	@$p0.ne bra l0x00000280;
+	set.eq.s32.s32 $p0/$o127, $r11, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0018];
+	@$p0.ne bra l0x00000288;
+	mov.u32 $r2, $r124;
+	bra l0x00000290;
+	l0x00000260: mov.u32 $r2, $r0;
+	bra l0x00000290;
+	l0x00000270: mov.u32 $r2, $r1;
+	bra l0x00000290;
+	l0x00000280: bra l0x00000290;
+	l0x00000288: mov.u32 $r2, $r3;
+	l0x00000290: set.ne.u32.u32 $p0/$o127, $r2, $r124;
+	@$p0.ne bra l0x00000338;
+	st.local.u32 [0x0004], $r10;
+	set.ge.s32.s32 $p0/$o127, s[0x0034], $r8;
+	ssy 0x00000318;
+	mov.half.u32 $r0, $r13;
+	mov.half.u32 $r2, $r12;
+	@$p0.ne bra l0x00000318;
+	shl.u32 $r3, $r13, 0x00000005;
+	and.b32 $r1, $r12, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0020];
+	shr.u32 $r9, $r12, 0x00000005;
+	add.u32 $r1, $r1, $r3;
+	shl.u32 $r3, $r9, 0x00000011;
+	add.u32 $r1, $r1, $r3;
+	st.global.u32 [$r5], $r1;
+	add.u32 $r3, $r5, 0x00000004;
+	mov.u16 $r1.lo, 0xffff8000;
+	st.global.s16 [$r3], $r1;
+	l0x00000318: nop;
+	add.u32 $r8, $r8, 0xffffffff;
+	mov.u32 $r9, $r124;
+	bra l0x00000768;
+	l0x00000338: shr.u32 $r0, $r2, 0x00000010;
+	cvt.f32.u32 $r1, $r0;
+	cvt.f32.u16 $r0, $r2.lo;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , childrentex,{ $r0,_,_,_};
+	st.local.u32 [0x0010], $r0;
+	st.local.u32 [0x0014], $r1;
+	ld.local.u32 $r3, [0x0014];
+	ld.local.u32 $r12, [0x0010];
+	set.eq.s32.s32 $p0/$o127, $r9, $r124;
+	ssy 0x00000400;
+	@$p0.ne bra l0x000003f0;
+	add.u32 $r0, $r3, -$r12;
+	add.u32 $r1, $r0, 0x00000001;
+	set.lt.s32.s32 $p0/$o127, $r9, $r1;
+	@$p0.ne bra l0x000003d8;
+	add.half.u32 $r1, $r0, $r8;
+	add.half.u32 $r0, -$r0, $r9;
+	add.u32 $r13, $r3, 0x00000001;
+	add.u32 $r8, $r1, 0x00000001;
+	add.u32 $r9, $r0, 0xffffffff;
+	bra l0x00000400;
+	l0x000003d8: add.half.u32 $r8, $r8, $r9;
+	add.half.u32 $r13, $r9, $r12;
+	mov.u32 $r9, $r124;
+	bra l0x00000400;
+	l0x000003f0: add.u32 $r8, $r8, 0x00000001;
+	add.u32 $r13, $r12, 0x00000001;
+	l0x00000400: add.u32 $r0, $r4, -$r8;
+	add.u32 $r0, $r0, $r6;
+	add.u32 $r0, $r0, 0x00000001;
+	ld.global.s8 $r0, [$r0];
+	cvt.s32.s16 $r0, $r0.lo;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x000c];
+	ssy 0x000004d0;
+	@$p0.ne bra l0x00000488;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0010];
+	@$p0.ne bra l0x00000498;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0014];
+	@$p0.ne bra l0x000004a8;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0018];
+	@$p0.ne bra l0x000004b8;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x001c];
+	@$p0.ne bra l0x000004c8;
+	bra l0x000004d0;
+	l0x00000488: mov.u32 $r0, 0x00000054;
+	bra l0x000004d0;
+	l0x00000498: mov.u32 $r0, 0x00000047;
+	bra l0x000004d0;
+	l0x000004a8: mov.u32 $r0, 0x00000043;
+	bra l0x000004d0;
+	l0x000004b8: mov.u32 $r0, 0x00000041;
+	bra l0x000004d0;
+	l0x000004c8: mov.u32 $r0, $r124;
+	l0x000004d0: set.lt.s32.s32 $p1/$o127, $r3, $r13;
+	ssy 0x00000688;
+	set.ne.s32.s32 $p0/$o127, $r0, $r124;
+	mov.u32 $r11, $r0;
+	@$p1.ne bra l0x00000688;
+	@$p0.eq bra l0x00000688;
+	l0x00000500: shr.s32 $r1, $r13, 0x00000012;
+	and.b32 $r0, $r13, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0024];
+	shl.u32 $r1, $r1, 0x00000002;
+	add.u32 $r1, $r0, $r1;
+	shr.s32 $r0, $r13, 0x00000002;
+	and.b32 $r0, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	cvt.f32.s32 $r0, $r0;
+	cvt.f32.s32 $r1, $r1;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , reftex,{ $r0,_,_,_};
+	cvt.s32.s32 $r0, $r0;
+	set.eq.s32.s32 $p0/$o127, $r11, $r0;
+	@$p0.ne bra l0x00000570;
+	st.local.u32 [0x0004], $r10;
+	bra l0x000006c0;
+	l0x00000570: add.u32 $r8, $r8, 0x00000001;
+	add.half.u32 $r0, -$r8, $r4;
+	add.half.u32 $r0, $r0, $r6;
+	add.u32 $r0, $r0, 0x00000001;
+	ld.global.s8 $r0, [$r0];
+	cvt.s32.s16 $r0, $r0.lo;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x000c];
+	add.u32 $r13, $r13, 0x00000001;
+	ssy 0x00000648;
+	@$p0.ne bra l0x00000600;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0010];
+	@$p0.ne bra l0x00000610;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0014];
+	@$p0.ne bra l0x00000620;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0018];
+	@$p0.ne bra l0x00000630;
+	set.eq.s32.s32 $p0/$o127, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x001c];
+	@$p0.ne bra l0x00000640;
+	bra l0x00000648;
+	l0x00000600: mov.u32 $r0, 0x00000054;
+	bra l0x00000648;
+	l0x00000610: mov.u32 $r0, 0x00000047;
+	bra l0x00000648;
+	l0x00000620: mov.u32 $r0, 0x00000043;
+	bra l0x00000648;
+	l0x00000630: mov.u32 $r0, 0x00000041;
+	bra l0x00000648;
+	l0x00000640: mov.u32 $r0, $r124;
+	l0x00000648: set.lt.s32.s32 $p0/$o127, $r3, $r13;
+	mov.u32 $r11, $r0;
+	@$p0.ne bra l0x00000680;
+	set.ne.s32.s32 $p1/$r0, $r11, $r124;
+	cvt.s32.s32 $p0|$o127, $r0;
+	@$p1.ne bra l0x00000500;
+	bra l0x00000688;
+	l0x00000680: set.ne.s32.s32 $p0/$o127, $r11, $r124;
+	l0x00000688: nop;
+	@$p0.ne bra l0x000001d8;
+	st.local.u32 [0x0004], $r10;
+	bra l0x000006c0;
+	l0x000006a8: ld.local.u32 $r10, [0x0004];
+	ld.local.u32 $r12, [0x0010];
+	mov.u32 $r13, $r124;
+	l0x000006c0: set.ge.s32.s32 $p0/$o127, s[0x0034], $r8;
+	add.u32 $r9, $r13, -$r12;
+	ssy 0x00000740;
+	@$p0.ne bra l0x00000740;
+	shr.u32 $r0, $r2, 0x00000010;
+	and.b32 $r1, $r2, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	and.b32 $r0, $r0, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0020];
+	shl.u32 $r1, $r1, 0x00000005;
+	shr.u32 $r2, $r2, 0x00000015;
+	add.u32 $r0, $r0, $r1;
+	shl.u32 $r1, $r2, 0x00000011;
+	add.u32 $r1, $r0, $r1;
+	or.b32 $r0, $r9, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0028];
+	st.global.u32 [$r5], $r1;
+	add.u32 $r1, $r5, 0x00000004;
+	st.global.s16 [$r1], $r0;
+	l0x00000740: add.u32 $r1, -$r9, $r8;
+	and.b32 $r0, $r10, constant1_Z17mummergpuRCKernelP10MatchCoordPcPKiS3_ii[0x0004];
+	shr.u32 $r2, $r10, 0x00000010;
+	add.u32 $r8, $r1, 0xffffffff;
+	bra l0x00000768;
+	l0x00000768: cvt.f32.u32 $r0, $r0;
+	cvt.f32.u32 $r1, $r2;
+	tex.1d.v4.f32.s32 { $r0,_,_,_} , childrentex,{ $r0,_,_,_};
+	add.u32 $r4, $r4, 0xffffffff;
+	st.local.u32 [0x0010], $r0;
+	set.ne.s32.s32 $p0/$o127, $r7, $r4;
+	st.local.u32 [0x0014], $r1;
+	add.u32 $r5, $r5, 0x00000008;
+	@$p0.ne bra l0x000000b8;
+	nop;
+
+	l_exit: exit;
+}
+//END INSTRUCTIONS

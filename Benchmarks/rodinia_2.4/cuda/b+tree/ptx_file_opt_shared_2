@@ -1,0 +1,265 @@
+/*
+* Ocelot Version : 2.1.0
+*/
+
+.version 3.1
+.target sm_13
+.address_size 64
+/* Module /home/vishwesh/Desktop/Register_Sharing_Pbm/Results/PTX_FILES/b+tree/ptx_org */
+
+/* Function prototypes */
+.entry findRangeK (.param  .s64 __cudaparm_findRangeK_height, .param  .u64 __cudaparm_findRangeK_knodesD, .param  .s64 __cudaparm_findRangeK_knodes_elem, .param  .u64 __cudaparm_findRangeK_currKnodeD, .param  .u64 __cudaparm_findRangeK_offsetD, .param  .u64 __cudaparm_findRangeK_lastKnodeD, .param  .u64 __cudaparm_findRangeK_offset_2D, .param  .u64 __cudaparm_findRangeK_startD, .param  .u64 __cudaparm_findRangeK_endD, .param  .u64 __cudaparm_findRangeK_RecstartD, .param  .u64 __cudaparm_findRangeK_ReclenD);
+
+/* Globals */
+
+/* Textures */
+
+/* Kernels */
+.entry findRangeK(.param  .s64 __cudaparm_findRangeK_height,
+		.param  .u64 __cudaparm_findRangeK_knodesD,
+		.param  .s64 __cudaparm_findRangeK_knodes_elem,
+		.param  .u64 __cudaparm_findRangeK_currKnodeD,
+		.param  .u64 __cudaparm_findRangeK_offsetD,
+		.param  .u64 __cudaparm_findRangeK_lastKnodeD,
+		.param  .u64 __cudaparm_findRangeK_offset_2D,
+		.param  .u64 __cudaparm_findRangeK_startD,
+		.param  .u64 __cudaparm_findRangeK_endD,
+		.param  .u64 __cudaparm_findRangeK_RecstartD,
+		.param  .u64 __cudaparm_findRangeK_ReclenD)
+{
+
+	.reg .u64 %r0;
+	.reg .u64 %r1;
+	.reg .u64 %r2;
+	.reg .u64 %r3;
+	.reg .u32 %r4;
+	.reg .u32 %r5;
+	.reg .u64 %r6;
+	.reg .u64 %r7;
+	.reg .pred %p8;
+	.reg .u64 %r9;
+	.reg .u64 %r10;
+	.reg .u32 %r11;
+	.reg .pred %p12;
+	.reg .u64 %r13;
+	.reg .u64 %r14;
+	.reg .u64 %r15;
+	.reg .u64 %r16;
+	.reg .u64 %r17;
+	.reg .u64 %r18;
+	.reg .u64 %r19;
+	.reg .u64 %r20;
+	.reg .u64 %r21;
+	.reg .u32 %r22;
+	.reg .u64 %r23;
+	.reg .u64 %r24;
+	.reg .u64 %r25;
+	.reg .u64 %r26;
+	.reg .u32 %r27;
+	.reg .pred %p28;
+	.reg .u32 %r29;
+	.reg .pred %p30;
+	.reg .u32 %r31;
+	.reg .u64 %r32;
+	.reg .u64 %r33;
+	.reg .pred %p34;
+	.reg .u64 %r35;
+	.reg .u64 %r36;
+	.reg .u32 %r37;
+	.reg .u64 %r38;
+	.reg .u64 %r39;
+	.reg .u64 %r40;
+	.reg .u64 %r41;
+	.reg .u32 %r42;
+	.reg .pred %p43;
+	.reg .u32 %r44;
+	.reg .pred %p45;
+	.reg .u32 %r46;
+	.reg .u64 %r47;
+	.reg .u64 %r48;
+	.reg .pred %p49;
+	.reg .u64 %r50;
+	.reg .u64 %r51;
+	.reg .u64 %r52;
+	.reg .u64 %r53;
+	.reg .u64 %r54;
+	.reg .u64 %r55;
+	.reg .u64 %r56;
+	.reg .u64 %r57;
+	.reg .pred %p58;
+	.reg .u64 %r59;
+	.reg .u64 %r60;
+	.reg .u64 %r61;
+	.reg .u64 %r62;
+	.reg .u64 %r63;
+	.reg .u64 %r64;
+	.reg .u32 %r65;
+	.reg .u32 %r66;
+	.reg .pred %p67;
+	.reg .u32 %r68;
+	.reg .u64 %r69;
+	.reg .u64 %r70;
+	.reg .u64 %r71;
+	.reg .u64 %r72;
+	.reg .u64 %r73;
+	.reg .u32 %r74;
+	.reg .u32 %r75;
+	.reg .pred %p76;
+	.reg .u32 %r77;
+	.reg .u64 %r78;
+	.reg .u64 %r79;
+	.reg .u32 %r80;
+	.reg .u32 %r81;
+	.reg .u32 %r82;
+	.reg .u64 %r83;
+	.reg .u64 %r84;
+	BB_1_0:
+	BB_1_2:
+		ld.param.u64 %r0, [__cudaparm_findRangeK_lastKnodeD]; 
+		ld.param.u64 %r1, [__cudaparm_findRangeK_currKnodeD]; 
+		ld.param.u64 %r2, [__cudaparm_findRangeK_endD]; 
+		ld.param.u64 %r3, [__cudaparm_findRangeK_startD]; 
+		cvt.s32.u16 %r4, %tid.x; 
+		cvt.s32.u16 %r5, %ctaid.x; 
+		ld.param.s64 %r6, [__cudaparm_findRangeK_height]; 
+		mov.u64 %r7, 0; 
+		setp.le.s64 %p8, %r6, %r7; 
+		@%p8 bra BB_1_16; 
+	BB_1_3:
+		cvt.s64.s32 %r9, %r5; 
+		cvt.s64.s32 %r10, %r4; 
+		mov.s32 %r11, 0; 
+		setp.eq.s32 %p12, %r4, %r11; 
+		mov.s64 %r13, 0; 
+		mul.wide.s32 %r14, %r5, 4; 
+		mul.wide.s32 %r15, %r5, 8; 
+		mul.wide.s32 %r16, %r4, 4; 
+		ld.param.u64 %r3, [__cudaparm_findRangeK_startD]; 
+		add.u64 %r17, %r14, %r3; 
+		ld.param.u64 %r2, [__cudaparm_findRangeK_endD]; 
+		add.u64 %r18, %r14, %r2; 
+		ld.param.u64 %r1, [__cudaparm_findRangeK_currKnodeD]; 
+		add.u64 %r19, %r15, %r1; 
+		ld.param.u64 %r0, [__cudaparm_findRangeK_lastKnodeD]; 
+		add.u64 %r20, %r15, %r0; 
+		ld.param.u64 %r21, [__cudaparm_findRangeK_knodesD]; 
+	BB_1_4:
+		ld.global.s32 %r22, [%r17]; 
+		ld.global.u64 %r23, [%r19]; 
+		mul.lo.u64 %r24, %r23, 4084; 
+		add.u64 %r25, %r21, %r24; 
+		add.u64 %r26, %r16, %r25; 
+		ld.global.s32 %r27, [%r26 + 2040]; 
+		setp.gt.s32 %p28, %r27, %r22; 
+		@%p28 bra BB_1_8; 
+	BB_1_5:
+		ld.global.s32 %r29, [%r26 + 2044]; 
+		setp.le.s32 %p30, %r29, %r22; 
+		@%p30 bra BB_1_8; 
+	BB_1_6:
+		ld.global.s32 %r31, [%r26 + 4]; 
+		cvt.s64.s32 %r32, %r31; 
+		ld.param.s64 %r33, [__cudaparm_findRangeK_knodes_elem]; 
+		setp.le.s64 %p34, %r33, %r32; 
+		@%p34 bra BB_1_8; 
+	BB_1_7:
+		ld.param.u64 %r35, [__cudaparm_findRangeK_offsetD]; 
+		add.u64 %r36, %r35, %r15; 
+		st.global.s64 [%r36], %r32; 
+	BB_1_8:
+		ld.global.s32 %r37, [%r18]; 
+		ld.global.u64 %r38, [%r20]; 
+		mul.lo.u64 %r39, %r38, 4084; 
+		add.u64 %r40, %r21, %r39; 
+		add.u64 %r41, %r16, %r40; 
+		ld.global.s32 %r42, [%r41 + 2040]; 
+		setp.gt.s32 %p43, %r42, %r37; 
+		@%p43 bra BB_1_12; 
+	BB_1_9:
+		ld.global.s32 %r44, [%r41 + 2044]; 
+		setp.le.s32 %p45, %r44, %r37; 
+		@%p45 bra BB_1_12; 
+	BB_1_10:
+		ld.global.s32 %r46, [%r41 + 4]; 
+		cvt.s64.s32 %r47, %r46; 
+		ld.param.s64 %r48, [__cudaparm_findRangeK_knodes_elem]; 
+		setp.le.s64 %p49, %r48, %r47; 
+		@%p49 bra BB_1_12; 
+	BB_1_11:
+		ld.param.u64 %r50, [__cudaparm_findRangeK_offset_2D]; 
+		add.u64 %r51, %r50, %r15; 
+		st.global.s64 [%r51], %r47; 
+	BB_1_12:
+		bar.sync 0; 
+		@!%p12 bra BB_1_14; 
+	BB_1_13:
+		ld.param.u64 %r52, [__cudaparm_findRangeK_offsetD]; 
+		add.u64 %r53, %r52, %r15; 
+		ld.global.s64 %r54, [%r53]; 
+		st.global.s64 [%r19], %r54; 
+		ld.param.u64 %r55, [__cudaparm_findRangeK_offset_2D]; 
+		add.u64 %r56, %r55, %r15; 
+		ld.global.s64 %r57, [%r56]; 
+		st.global.s64 [%r20], %r57; 
+	BB_1_14:
+		bar.sync 0; 
+		add.s64 %r13, %r13, 1; 
+		setp.lt.s64 %p58, %r13, %r6; 
+		@%p58 bra BB_1_4; 
+	BB_1_15:
+		bra.uni BB_1_17; 
+	BB_1_16:
+		cvt.s64.s32 %r59, %r5; 
+		cvt.s64.s32 %r60, %r4; 
+		mul.wide.s32 %r14, %r5, 4; 
+		mul.wide.s32 %r61, %r5, 8; 
+		mul.wide.s32 %r16, %r4, 4; 
+		ld.param.u64 %r3, [__cudaparm_findRangeK_startD]; 
+		add.u64 %r17, %r14, %r3; 
+		ld.param.u64 %r2, [__cudaparm_findRangeK_endD]; 
+		add.u64 %r18, %r14, %r2; 
+		ld.param.u64 %r1, [__cudaparm_findRangeK_currKnodeD]; 
+		add.u64 %r19, %r61, %r1; 
+		ld.param.u64 %r0, [__cudaparm_findRangeK_lastKnodeD]; 
+		add.u64 %r20, %r61, %r0; 
+		ld.param.u64 %r21, [__cudaparm_findRangeK_knodesD]; 
+	BB_1_17:
+		ld.global.u64 %r62, [%r19]; 
+		mul.lo.u64 %r63, %r62, 4084; 
+		add.u64 %r64, %r21, %r63; 
+		add.u64 %r26, %r16, %r64; 
+		ld.global.s32 %r65, [%r17]; 
+		ld.global.s32 %r66, [%r26 + 2040]; 
+		setp.ne.s32 %p67, %r65, %r66; 
+		@%p67 bra BB_1_19; 
+	BB_1_18:
+		ld.global.s32 %r68, [%r26 + 4]; 
+		ld.param.u64 %r69, [__cudaparm_findRangeK_RecstartD]; 
+		add.u64 %r70, %r69, %r14; 
+		st.global.s32 [%r70], %r68; 
+	BB_1_19:
+		bar.sync 0; 
+		ld.global.u64 %r71, [%r20]; 
+		mul.lo.u64 %r72, %r71, 4084; 
+		add.u64 %r73, %r21, %r72; 
+		add.u64 %r41, %r16, %r73; 
+		ld.global.s32 %r74, [%r18]; 
+		ld.global.s32 %r75, [%r41 + 2040]; 
+		setp.ne.s32 %p76, %r74, %r75; 
+		@%p76 bra BB_1_21; 
+	BB_1_20:
+		ld.global.s32 %r77, [%r41 + 4]; 
+		ld.param.u64 %r78, [__cudaparm_findRangeK_RecstartD]; 
+		add.u64 %r79, %r78, %r14; 
+		ld.global.s32 %r80, [%r79]; 
+		sub.s32 %r81, %r77, %r80; 
+		add.s32 %r82, %r81, 1; 
+		ld.param.u64 %r83, [__cudaparm_findRangeK_ReclenD]; 
+		add.u64 %r84, %r83, %r14; 
+		st.global.s32 [%r84], %r82; 
+	BB_1_21:
+		exit; 
+	BB_1_1:
+}
+
+

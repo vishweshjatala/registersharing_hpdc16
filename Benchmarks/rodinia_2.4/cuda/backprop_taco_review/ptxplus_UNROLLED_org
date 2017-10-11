@@ -1,0 +1,271 @@
+//HEADER
+.version 1.4+
+.target sm_10, map_f64_to_f32
+//END HEADER
+
+
+//INSTRUCTIONS
+
+.const .u32 constant1_Z24bpnn_adjust_weights_cudaPfiS_iS_S_[2] = {
+          0x000003ff, 0x3e99999a
+};
+
+.const .u32 constant1_Z22bpnn_layerforward_CUDAPfS_S_S_ii[3] = {
+          0x000003ff, 0x00000001, 0x40800000
+};
+
+
+
+
+
+.entry  _Z22bpnn_layerforward_CUDAPfS_S_S_ii (
+	.param  .u64 __cudaparm__Z22bpnn_layerforward_CUDAPfS_S_S_ii_input_cuda ,
+	.param  .u64 __cudaparm__Z22bpnn_layerforward_CUDAPfS_S_S_ii_output_hidden_cuda ,
+	.param  .u64 __cudaparm__Z22bpnn_layerforward_CUDAPfS_S_S_ii_input_hidden_cuda ,
+	.param  .u64 __cudaparm__Z22bpnn_layerforward_CUDAPfS_S_S_ii_hidden_partial_sum ,
+	.param  .s32 __cudaparm__Z22bpnn_layerforward_CUDAPfS_S_S_ii_in ,
+	.param  .s32 __cudaparm__Z22bpnn_layerforward_CUDAPfS_S_S_ii_hid )
+{
+	.reg .u32 $r<13>;
+	.reg .u32 $ofs<3>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	and.u16 $r0.hi, $r0.hi, constant1_Z22bpnn_layerforward_CUDAPfS_S_S_ii[0x0000];
+	cvt.u32.u16 $p1|$r2, $r0.lo;
+	cvt.u32.u16 $r1, $r0.hi;
+	ssy 0x00000078;
+	cvt.u32.u16 $r5, %ctaid.y;
+	set.eq.s32.s32 $p0/$o127, $r2, $r124;
+	@$p1.neu bra l0x00000078;
+	shl.u32 $r0, $r5, 0x00000004;
+	add.u32 $r0, $r1, $r0;
+	shl.u32 $r0, $r0, 0x00000002;
+	add.u32 $r0, s[0x0010], $r0;
+	add.u32 $r0, $r0, 0x00000004;
+	ld.global.u32 $r0, [$r0];
+	shl.b32 $ofs1, $r1, 0x00000002;
+	mov.u32 s[$ofs1+0x0038], $r0;
+	l0x00000078: nop;
+	bar.sync 0x00000000;
+	shl.u32 $r3, s[0x0034], 0x00000004;
+	add.u32 $r0, s[0x0034], 0x00000001;
+	add.u32 $r3, $r3, 0x00000010;
+	mul.half.lo.u16 $r4, $r0.lo, $r1.hi;
+	mul.half.lo.u16 $r6, $r3.lo, $r5.hi;
+	mad.wide.u16 $r4, $r0.hi, $r1.lo, $r4;
+	mad.wide.u16 $r6, $r3.hi, $r5.lo, $r6;
+	shl.u32 $r4, $r4, 0x00000010;
+	shl.u32 $r6, $r6, 0x00000010;
+	mad.wide.u16 $r0, $r0.lo, $r1.lo, $r4;
+	mad.wide.u16 $r3, $r3.lo, $r5.lo, $r6;
+	add.half.u32 $r0, $r0, $r3;
+	add.half.u32 $r0, $r2, $r0;
+	add.u32 $r0, s[0x0034], $r0;
+	shl.u32 $r0, $r0, 0x00000002;
+	shl.u32 $r3, $r1, 0x00000004;
+	add.half.u32 $r6, s[0x0020], $r0;
+	add.half.u32 $r3, $r2, $r3;
+	add.u32 $r0, $r6, 0x00000008;
+	ld.global.u32 $r0, [$r0];
+	shl.b32 $ofs1, $r3, 0x00000002;
+	mov.u32 s[$ofs1+0x0078], $r0;
+	bar.sync 0x00000000;
+	shl.b32 $ofs2, $r1, 0x00000002;
+	mov.u32 $r0, s[$ofs1+0x0078];
+	mul.f32 $r0, s[$ofs2+0x0038], $r0;
+	mov.u32 s[$ofs1+0x0078], $r0;
+	bar.sync 0x00000000;
+	mov.u32 $r0, 0x3f800000;
+	mov.u32 $r7, 0x00000001;
+	l0x00000160: mul.f32 $r0, $r0, 0x3f800000;
+	nop; //ex2.f32 $r0, $r0;
+	ex2.f32 $r0, $r0;
+	cvt.rz.s32.f32 $r3, $r0;
+	mov.half.u32 $r0, $r1;
+	mov.half.u32 $r4, $r3;
+	callp l0x000002c0;
+	set.ne.s32.s32 $p1/$o127, $r0, $r124;
+	ssy 0x00000200;
+	@$p1.ne bra l0x00000200;
+	shr.s32 $r0, $r3, 0x0000001f;
+	and.b32 $r0, $r0, constant1_Z22bpnn_layerforward_CUDAPfS_S_S_ii[0x0004];
+	add.u32 $r0, $r0, $r3;
+	shr.s32 $r0, $r0, 0x00000001;
+	add.u32 $r0, $r1, $r0;
+	shl.u32 $r0, $r0, 0x00000004;
+	add.u32 $r0, $r2, $r0;
+	shl.b32 $ofs2, $r0, 0x00000002;
+	mov.u32 $r0, s[$ofs2+0x0078];
+	add.f32 $r0, s[$ofs1+0x0078], $r0;
+	mov.u32 s[$ofs1+0x0078], $r0;
+	l0x00000200: nop;
+	bar.sync 0x00000000;
+	add.u32 $r7, $r7, 0x00000001;
+	cvt.f32.s32 $r0, $r7;
+	set.le.f32.f32 $p1/$o127, $r0, constant1_Z22bpnn_layerforward_CUDAPfS_S_S_ii[0x0008];
+	@$p1.ne bra l0x00000160;
+	add.u32 $r3, $r6, 0x00000008;
+	mov.u32 $r0, s[$ofs1+0x0078];
+	st.global.u32 [$r3], $r0;
+	bar.sync 0x00000000;
+	@$p0.eq retp;
+	mov.u32 $r0, s[0x0034];
+	mul.wide.u16 $r3, $r5.lo, $r0.hi;
+	mad.wide.u16 $r3, $r5.hi, $r0.lo, $r3;
+	shl.u32 $r3, $r3, 0x00000010;
+	shl.u32 $r2, $r2, 0x00000004;
+	mad.wide.u16 $r0, $r5.lo, $r0.lo, $r3;
+	add.half.u32 $r2, $r1, $r2;
+	add.half.u32 $r0, $r0, $r1;
+	shl.b32 $ofs1, $r2, 0x00000002;
+	shl.u32 $r1, $r0, 0x00000002;
+	mov.u32 $r0, s[$ofs1+0x0078];
+	add.u32 $r1, s[0x0028], $r1;
+	st.global.u32 [$r1], $r0;
+	retp;
+	l0x000002c0: abs.u32 $r8, $r4;
+	cvt.f32.u32 $r9, $r8;
+	abs.u32 $r10, $r0;
+	rcp.f32 $r11, $r9;
+	cvt.rz.f32.u32 $r9, $r10;
+	add.u32 $r11, $r11, 0xfffffffe;
+	mul.rz.f32 $p1|$r9, $r9, $r11;
+	cvt.rz.u32.f32 $r9, $r9;
+	mul.wide.u16 $r12, $r8.lo, $r9.hi;
+	mad.wide.u16 $r12, $r8.hi, $r9.lo, $r12;
+	shl.u32 $r12, $r12, 0x00000010;
+	mad.wide.u16 $r12, $r8.lo, $r9.lo, $r12;
+	add.u32 $r12, $r10, -$r12;
+	cvt.rz.f32.u32 $r12, $r12;
+	mul.rz.f32 $p1|$r11, $r12, $r11;
+	cvt.rz.u32.f32 $r11, $r11;
+	add.u32 $r9, $r9, $r11;
+	mul.wide.u16 $r11, $r9.hi, $r8.lo;
+	mad.wide.u16 $r11, $r9.lo, $r8.hi, $r11;
+	shl.u32 $r11, $r11, 0x00000010;
+	mad.wide.u16 $r11, $r9.lo, $r8.lo, $r11;
+	add.u32 $r11, -$r11, $r10;
+	set.le.u32.u32 $r11, $r8, $r11;
+	add.u32 $r9, -$r11, $r9;
+	mul.wide.u16 $r11, $r9.hi, $r8.lo;
+	mad.wide.u16 $r11, $r9.lo, $r8.hi, $r11;
+	shl.u32 $r11, $r11, 0x00000010;
+	mad.wide.u16 $r8, $r9.lo, $r8.lo, $r11;
+	shr.u32 $r0, $r0, 0x0000001f;
+	add.u32 $r9, -$r8, $r10;
+	cvt.s32.s32 $r8, -$r0;
+	xor.b32 $r8, $r8, $r9;
+	set.ne.s32.s32 $p1/$o127, $r4, $r124;
+	add.u32 $r0, $r0, $r8;
+	@$p1.equ not.b32 $r0, $r4;
+	retp;
+	nop;
+
+	l_exit: exit;
+}
+
+.entry  _Z24bpnn_adjust_weights_cudaPfiS_iS_S_ (
+	.param  .u64 __cudaparm__Z24bpnn_adjust_weights_cudaPfiS_iS_S__delta ,
+	.param  .s32 __cudaparm__Z24bpnn_adjust_weights_cudaPfiS_iS_S__hid ,
+	.param  .u64 __cudaparm__Z24bpnn_adjust_weights_cudaPfiS_iS_S__ly ,
+	.param  .s32 __cudaparm__Z24bpnn_adjust_weights_cudaPfiS_iS_S__in ,
+	.param  .u64 __cudaparm__Z24bpnn_adjust_weights_cudaPfiS_iS_S__w ,
+	.param  .u64 __cudaparm__Z24bpnn_adjust_weights_cudaPfiS_iS_S__oldw )
+{
+	.reg .u32 $r<12>;
+	.reg .pred $p<4>;
+
+	.reg .u32 $r124;
+
+	.reg .u32 $o127;
+
+	
+	add.u32 $r3, s[0x0018], 0x00000001;
+	shl.u32 $r2, s[0x0018], 0x00000004;
+	cvt.u32.u16 $r1, %ctaid.y;
+	and.u16 $r0.hi, $r0.hi, constant1_Z24bpnn_adjust_weights_cudaPfiS_iS_S_[0x0000];
+	add.u32 $r4, $r2, 0x00000010;
+	cvt.u32.u16 $r2, $r0.hi;
+	mul.half.lo.u16 $r5, $r3.lo, $r2.hi;
+	mul.half.lo.u16 $r6, $r4.lo, $r1.hi;
+	mad.wide.u16 $r5, $r3.hi, $r2.lo, $r5;
+	mad.wide.u16 $r6, $r4.hi, $r1.lo, $r6;
+	shl.u32 $r5, $r5, 0x00000010;
+	shl.u32 $r6, $r6, 0x00000010;
+	mad.wide.u16 $r3, $r3.lo, $r2.lo, $r5;
+	mad.wide.u16 $r4, $r4.lo, $r1.lo, $r6;
+	add.u32 $r3, $r3, $r4;
+	cvt.u32.u16 $r0, $r0.lo;
+	shl.u32 $r4, $r1, 0x00000004;
+	add.half.u32 $r3, $r0, $r3;
+	add.half.u32 $r5, $r2, $r4;
+	add.u32 $r4, s[0x0018], $r3;
+	shl.u32 $r3, $r0, 0x00000002;
+	shl.u32 $r5, $r5, 0x00000002;
+	shl.u32 $r4, $r4, 0x00000002;
+	add.half.u32 $r0, s[0x0010], $r3;
+	add.half.u32 $r5, s[0x0020], $r5;
+	add.half.u32 $r8, s[0x0038], $r4;
+	add.half.u32 $r7, s[0x0030], $r4;
+	add.u32 $r6, $r0, 0x00000004;
+	ld.global.u32 $r10, [$r6];
+	add.u32 $r5, $r5, 0x00000004;
+	add.u32 $r4, $r8, 0x00000008;
+	ld.global.u32 $r11, [$r4];
+	ld.global.u32 $r9, [$r5];
+	add.u32 $r7, $r7, 0x00000008;
+	ld.global.u32 $r8, [$r7];
+	cvt.f32.f32 $r10, $r10;
+	cvt.f32.f32 $r11, $r11;
+	mul.f32 $r10, $r10, 0x3e99999a;
+	cvt.f32.f32 $r9, $r9;
+	mul.f32 $r11, $r11, 0x3e99999a;
+	mad.f32 $r9, $r9, $r10, $r11;
+	cvt.f32.f32 $r8, $r8;
+	add.f32 $r8, $r8, $r9;
+	st.global.u32 [$r7], $r8;
+	ld.global.u32 $r7, [$r6];
+	ld.global.u32 $r6, [$r4];
+	ld.global.u32 $r5, [$r5];
+	cvt.f32.f32 $r7, $r7;
+	cvt.f32.f32 $r8, $r6;
+	cvt.f32.f32 $r5, $r5;
+	mul.f32 $r6, $r7, 0x3e99999a;
+	mul.f32 $r7, $r8, 0x3e99999a;
+	mad.f32 $r5, $r5, $r6, $r7;
+	st.global.u32 [$r4], $r5;
+	bar.sync 0x00000000;
+	set.eq.s32.s32 $p0/$o127, $r2, $r124;
+	@$p0.ne set.eq.s32.s32 $p0/$o127, $r1, $r124;
+	@$p0.eq retp;
+	add.half.u32 $r1, s[0x0038], $r3;
+	add.half.u32 $r4, s[0x0030], $r3;
+	add.u32 $r1, $r1, 0x00000004;
+	ld.global.u32 $r3, [$r1];
+	add.u32 $r2, $r0, 0x00000004;
+	ld.global.u32 $r0, [$r2];
+	add.u32 $r5, $r4, 0x00000004;
+	ld.global.u32 $r4, [$r5];
+	cvt.f32.f32 $r3, $r3;
+	cvt.f32.f32 $r6, $r0;
+	mul.f32 $r0, $r3, 0x3e99999a;
+	mad.f32 $r0, $r6, 0x3e99999a, $r0;
+	cvt.f32.f32 $r3, $r4;
+	add.f32 $r0, $r3, $r0;
+	st.global.u32 [$r5], $r0;
+	ld.global.u32 $r3, [$r1];
+	ld.global.u32 $r0, [$r2];
+	cvt.f32.f32 $r2, $r3;
+	cvt.f32.f32 $r3, $r0;
+	mul.f32 $r0, $r2, 0x3e99999a;
+	mad.f32 $r0, $r3, 0x3e99999a, $r0;
+	st.global.u32 [$r1], $r0;
+
+	l_exit: exit;
+}
+//END INSTRUCTIONS
