@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/0.1796500720/CUDA_INSTALL_PATH/delimiter=\:
+environment/project/0.1796500720/CUDA_INSTALL_PATH/operation=append
+environment/project/0.1796500720/CUDA_INSTALL_PATH/value=/usr/local/cuda
+environment/project/0.1796500720/append=true
+environment/project/0.1796500720/appendContributed=true
