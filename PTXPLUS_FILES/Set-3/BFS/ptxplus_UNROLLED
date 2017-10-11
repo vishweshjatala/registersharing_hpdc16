@@ -1,0 +1,94 @@
+//HEADER
+.version 1.4+
+.target sm_10, map_f64_to_f32
+//END HEADER
+
+
+//INSTRUCTIONS
+
+.const .u32 constant1_Z6KernelP4NodePiPbS2_S1_S2_i[1] = {
+          0x00000100
+};
+
+
+
+
+
+.entry  _Z6KernelP4NodePiPbS2_S1_S2_i (
+	.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_nodes ,
+	.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_edges ,
+	.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_mask ,
+	.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_graph_visited ,
+	.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_cost ,
+	.param  .u64 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_g_over ,
+	.param  .s32 __cudaparm__Z6KernelP4NodePiPbS2_S1_S2_i_no_of_nodes )
+{
+	.reg .u32 $r0;
+	.reg .pred $p0;
+	.reg .u32 $o127;
+	.reg .u32 $r1;
+	.reg .u32 $r2;
+	.reg .u32 $r3;
+	.reg .u32 $r4;
+	.reg .u32 $r6;
+	.reg .u32 $r5;
+	.reg .pred $p1;
+	.reg .pred $p2;	
+	.reg .pred $p3;
+
+	
+	cvt.u32.u16 $r0, $r0.lo;
+	mad.lo.u16 $r0, %ctaid.x, 0x00000100, $r0;
+	set.le.s32.s32 $p0/$o127, s[0x0040], $r0;
+	@$p0.ne retp;
+	add.u32 $r1, s[0x0020], $r0;
+	ld.global.s8 $r2, [$r1];
+	cvt.s32.s16 $p0|$o127, $r2.lo;
+	@$p0.eq retp;
+	mov.u16 $r3.lo, 0x00000000;
+	shl.u32 $r2, $r0, 0x00000003;
+	st.global.s8 [$r1], $r3;
+	add.u32 $r1, s[0x0028], $r0;
+	mov.u16 $r3.lo, 0x00000001;
+	add.u32 $r4, s[0x0010], $r2;
+	st.global.s8 [$r1], $r3;
+	add.u32 $r2, $r4, 0x00000004;
+	ld.global.u32 $r1, [$r4];
+	ld.global.u32 $r2, [$r2];
+	add.u32 $r6, $r1, $r2;
+	set.le.s32.s32 $p0/$o127, $r6, $r1;
+	@$p0.ne retp;
+	shl.u32 $r2, $r1, 0x00000002;
+	add.u32 $r5, s[0x0018], $r2;
+	l0x000000b8: ld.global.u32 $r3, [$r5];
+	add.u32 $r2, s[0x0028], $r3;
+	ld.global.s8 $r2, [$r2];
+	cvt.s32.s16 $p0|$o127, $r2.lo;
+	ssy 0x00000168;
+	@$p0.ne bra l0x00000168;
+	shl.u32 $r2, $r0, 0x00000002;
+	add.u32 $r2, s[0x0030], $r2;
+	ld.global.u32 $r2, [$r2];
+	shl.u32 $r6, $r3, 0x00000002;
+	add.u32 $r6, s[0x0030], $r6;
+	add.u32 $r2, $r2, 0x00000001;
+	st.global.u32 [$r6], $r2;
+	add.u32 $r2, s[0x0020], $r3;
+	mov.u16 $r3.lo, 0x00000001;
+	st.global.s8 [$r2], $r3;
+	mov.u32 $r2, s[0x0038];
+	st.global.s8 [$r2], $r3;
+	add.u32 $r2, $r4, 0x00000004;
+	ld.global.u32 $r2, [$r2];
+	ld.global.u32 $r3, [$r4];
+	add.u32 $r6, $r3, $r2;
+	l0x00000168: nop;
+	add.u32 $r1, $r1, 0x00000001;
+	set.gt.s32.s32 $p0/$o127, $r6, $r1;
+	add.u32 $r5, $r5, 0x00000004;
+	@$p0.ne bra l0x000000b8;
+	nop;
+
+	l_exit: exit;
+}
+//END INSTRUCTIONS

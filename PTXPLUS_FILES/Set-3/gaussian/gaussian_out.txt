@@ -1,0 +1,11 @@
+.reg .u32 $r1;
+.reg .u32 $r0;
+.reg .u32 $r2;
+.reg .pred $p0;
+.reg .u32 $o127;
+.reg .u32 $r3;
+.reg .u32 $r5;
+.reg .u32 $r4;
+.reg .pred $p1;
+.reg .pred $p2;
+.reg .pred $p3;
